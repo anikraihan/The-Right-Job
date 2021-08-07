@@ -13,6 +13,13 @@
   
     <script src="https://kit.fontawesome.com/5bd5cf3f78.js" crossorigin="anonymous"></script>
 
+    <style>
+.main {
+    background: #daeefe;
+    padding: 50px;
+}
+</style>
+
 </head>
 <body>
 
@@ -119,7 +126,7 @@ if(isset($_GET['error']))
                     <div class="signup-image">
                         <figure><img src="../assets/images/logo.png" alt="sing up image"></figure>
 
-                        <figure><img src="../assets/images/create ac.svg" alt="sing up image"></figure>
+                        <figure><img src="../assets/images/create ac company.svg" alt="sing up image"></figure>
                         
                          <a class="form-text text-muted" href="company_login.php">  <i class="fas fa-user"></i>  I am already a member </a> 
                     </div>
