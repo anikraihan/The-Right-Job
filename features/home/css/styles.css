@@ -118,38 +118,7 @@ a:active {
     }
 }
 
-.testmonial-single {
-    transition: all 0.5s ease 0s;
-    -webkit-transition: all 0.5s ease 0s;
-    position: relative
-}
 
-.testmonial-single:before {
-    position: absolute;
-    content: "\e67e";
-    font-size: 36px;
-    color: #2196f3;
-    font-family: themify;
-    right: 30px
-}
-
-@media screen and (max-width: 767px) {
-    .testmonial-single:before {
-        right: -17px;
-        top: -24px;
-        font-size: 24px
-    }
-}
-
-
-
-@media screen and (max-width: 991px) {
-    .map-listing {
-        height: 500px;
-        position: inherit;
-        width: auto
-    }
-}
 
 .search-form_input {
     color: #2196f3
@@ -230,20 +199,6 @@ a:active {
 }
 
 .
-
-.social-links li {
-    display: inline-block;
-    font-size: 22px;
-    margin-right: 30px
-}
-
-.social-links li:last-child {
-    margin-right: 0
-}
-
-.social-links li a {
-    color: rgba(225, 225, 225, 0.9)
-}
 
 ul.countdown li {
     display: inline-block;
@@ -366,87 +321,49 @@ ul.countdown li p.timeRefSeconds {
 }
 
 
-
-.social-icon-style li {
-    display: inline-block;
-    margin-right: 10px
+.bg-light2 {
+    background-color: #c3e1ff !important;
 }
 
-.social-icon-style li:last-child {
-    margin-right: 0
+.bradcam_area_2 {
+    background-size: cover;
+    background-position: center;
+    padding: 182px 0 102px 0;
+    background-repeat: no-repeat;
+    position: relative;
+    z-index: 0;
+    background-size: cover;
+}
+.bradcam_bg_2 {
+    background: #001D38;
+        background-position-x: 0%;
+        background-position-y: 0%;
+        background-repeat: repeat;
+        background-size: auto;
+}
+.review_details_area {
+    padding-top: 100px;
+    padding-bottom: 100px;
+}
+.wave {
+    bottom: 0;
+    left: 0;
+    width: 50%;
+    height: 50%;
+    z-index: -1;
+}
+.wave3 {
+    bottom: 0;
+    left: 0;
+    width: 50%;
+    z-index: -1;
 }
 
-.social-icon-style li a {
-    font-size: 14px;
-    border: 1px solid #6a6a6a;
-    width: 35px;
-    height: 35px;
-    border-radius: 35px;
-    line-height: 35px;
-    display: inline-block;
-    text-align: center
-}
-
-.social-icon-style li a:hover {
+.bradcam_area_2 h3 {
+    font-size: 56px;
     color: #fff;
-    background: #2196f3;
-    border: 1px solid #2196f3
-}
-
-@media screen and (max-width: 767px) {
-    .social-icon-style li a {
-        width: 30px;
-        height: 30px;
-        border-radius: 30px;
-        line-height: 30px
-    }
-}
-
-
-
-footer {
-    font-size: 15px
-    background: black;
-}
-
-footer p {
-    margin-bottom: 0
-}
-
-footer h3 {
-    font-size: 18px;
-    font-weight: 500;
-    margin-bottom: 30px;
-    line-height: 1;
-    position: relative
-}
-
-.footer-bar {
-    float: left;
-    width: 100%;
-    padding-top: 20px;
-    padding-bottom: 20px
-}
-
-.footer-bar span {
-    color: black;
-    font-size: 15px;
-    font-weight: 400
-}
-
-
-
-@media screen and (max-width: 767px) {
-    .footer-bar p {
-        font-size: 12px
-    }
-    footer .list-style-1 li {
-        padding: 0 0 5px 0
-    }
-    footer .list-style-1 li:last-child {
-        padding: 0
-    }
-    .footer-title-style1 {
-        margin-bottom: 20px
-    }
+    font-weight: 700;
+    margin-bottom: 0;
+    text-transform: capitalize;
+    text-shadow: 2px 8px 6px rgb(0 0 0 / 20%), 0px -5px 35px rgb(255 255 255 / 30%);
 }

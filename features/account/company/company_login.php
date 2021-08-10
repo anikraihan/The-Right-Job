@@ -6,7 +6,7 @@ if(!isset($_SESSION))
 } 
 //after successful login will be redirect to following page
 if (isset($_SESSION['email'])) {
-  
+   $_SESSION["company_name"] = $company_name;
   header("location: ../loginsuccess.php");
 }
 
