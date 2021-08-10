@@ -75,8 +75,8 @@ $result2=mysqli_query($conn,"SELECT * FROM company,job_post WHERE job_post.compa
     <span class="navbar-toggler-icon"></span>
   </button>
 
-                                    <!-- start menu area -->
-                                    <ul class="navbar-nav ml-auto" id="nav" style="display: none;">
+                                   
+                                        <ul class="navbar-nav ml-auto" id="nav" style="display: none;">
                                         <li><a href="home.php">Home</a></li>
                                      <li><a href="../account/logout.php">Logout</a></li>
                                 
@@ -200,14 +200,10 @@ $result2=mysqli_query($conn,"SELECT * FROM company,job_post WHERE job_post.compa
 
     <!-- all js include start -->
 
-    <!-- jQuery -->
-    <script src="plugins/jquery/jquery-3.1.0.min.js"></script>
+    <script src="js/core.min.js"></script>
 
-    <!-- bootstrap -->
-    <script src="plugins/bootstrap/js/bootstrap.min.js"></script>
-
-    <!-- switchery -->
-    <script src="plugins/switchery/switchery.min.js"></script>
+    <!-- Serch -->
+    <script src="search/search.js"></script>
 
     <!-- custom scripts -->
     <script src="js/main.js"></script>

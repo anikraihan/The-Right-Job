@@ -25,8 +25,13 @@ if (isset($_POST['signin'])) {
         if ($result->num_rows > 0) {
 			
             $_SESSION["email"] = $email;
+             $_SESSION["company_name"] = $company_name;
             header("location: ../loginsuccess.php?error=$error");
-			
+			while ($row = $result->fetch_assoc()) {
+
+                $_SESSION["utype"] = $row['admin'];
+            }
+            
 			
 			
         } else {

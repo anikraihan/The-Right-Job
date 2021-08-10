@@ -4,9 +4,10 @@ session_start();
 
 if(isset($_SESSION['email'])) {
 $email = $_SESSION["email"];
+
 }
 else{
-    header("location: login.php");
+  header("location: ../account/logout.php");
 }
 
 ?>
@@ -25,6 +26,9 @@ $result3 = mysqli_query($conn,"SELECT * FROM job_post group by job_catagory orde
 
 
 ?>
+
+              
+
 
 <!DOCTYPE html>
 <html lang="en">
@@ -89,6 +93,7 @@ $result3 = mysqli_query($conn,"SELECT * FROM job_post group by job_catagory orde
                                         
                                       
                                         <li><a href="jobs_list.php">jobs list</a></li>
+                                        <li><a href="post_job.php">Post a Job</a></li>
                                     </ul>
                                     <!-- end menu area -->
 
@@ -114,6 +119,10 @@ $result3 = mysqli_query($conn,"SELECT * FROM job_post group by job_catagory orde
                         <div class="display-table-cell vertical-align-middle text-center">
 
                              <p class="font-size18 xs-font-size16 text-white letter-spacing-1 margin-15px-bottom">logged in as <?php echo $email;?></p>
+
+                           
+
+                            
                             
                                        
                             
