@@ -4,9 +4,10 @@ session_start();
 
 if(isset($_SESSION['email'])) {
 $email = $_SESSION["email"];
+
 }
 else{
-    header("location: login.php");
+  header("location: ../account/logout.php");
 }
 
 ?>
@@ -21,9 +22,13 @@ $conn = new mysqli("localhost", "root", "", "the_right_job");
 
 $result=mysqli_query($conn,"SELECT * FROM job_post");
 $result2=mysqli_query($conn,"SELECT * FROM company,job_post WHERE job_post.company_id=company.id");
+$result3 = mysqli_query($conn,"SELECT * FROM job_post group by job_catagory order by COUNT(job_catagory) desc");
 
 
 ?>
+
+              
+
 
 <!DOCTYPE html>
 <html lang="en">
@@ -83,16 +88,20 @@ $result2=mysqli_query($conn,"SELECT * FROM company,job_post WHERE job_post.compa
                                     <!-- start menu area -->
                                     <ul class="navbar-nav ml-auto" id="nav" style="display: none;">
                                         <li><a href="home.php">Home</a></li>
-                                     <li><a href="../account/logout.php">Logout</a></li>
+                                     
                                 
                                         
                                       
                                         <li><a href="jobs_list.php">jobs list</a></li>
+                                        <li><a href="post_job.php">Post a Job</a></li>
+                                        <li><a href="post_review.php">Post a review</a></li>
+                                       
+                                          <li><a href="../account/logout.php" class="btn btn-warning p-3" >Logout</a></li>
+                                        
                                     </ul>
                                     <!-- end menu area -->
 
-                                   
-                                
+                                    
 
                                 </nav>
                             </div>
@@ -102,6 +111,19 @@ $result2=mysqli_query($conn,"SELECT * FROM company,job_post WHERE job_post.compa
             </div>
         </header>
         <!-- end header section -->
+
+
+               <span>
+            <?php
+ 
+
+
+                  if(isset($_GET['error']))
+                   echo $_GET['error'];
+   
+ 
+                 ?>
+              </span>
 
         <!-- start banner -->
         <section class="bg-img screen-height cover-background line-banner" data-overlay-dark="6" data-background="img/banner/bg2.jpg">
@@ -113,6 +135,10 @@ $result2=mysqli_query($conn,"SELECT * FROM company,job_post WHERE job_post.compa
                         <div class="display-table-cell vertical-align-middle text-center">
 
                              <p class="font-size18 xs-font-size16 text-white letter-spacing-1 margin-15px-bottom">logged in as <?php echo $email;?></p>
+
+                           
+
+                            
                             
                                        
                             
@@ -123,25 +149,14 @@ $result2=mysqli_query($conn,"SELECT * FROM company,job_post WHERE job_post.compa
 
 
                             <div class="form-bg padding-20px-tb margin-40px-top xs-margin-30px-top padding-25px-lr xs-padding-20px-all border-radius-4">
-                                <form method="post" action="#!">
+                                <form method="post" action="search/search.js">
                                     <div class="form-row align-items-center">
-                                        <div class="col-md-3 my-1">
-                                            <input type="text" class="form-control" id="inlineFormInputName" placeholder="Keyword">
+                                        <div class="col-md-9 my-1">
+                                            <input type="text" name="search_text" id="search_text" placeholder="Search by Company Details" class="form-control" />
                                         </div>
-                                        <div class="col-md-3 my-1">
-                                            <input type="text" class="form-control" id="inlineFormInputName1" placeholder="Location">
-                                        </div>
-                                        <div class="col-md-3 my-1">
-                                            <select class="form-control" id="exampleFormControlSelect2">
-                                                <option selected>All Categories</option>
-                                                <option value="1">HealthCare</option>
-                                                <option value="2">Education</option>
-                                                <option value="3">Reataurant</option>
-                                                <option value="4">Design &amp; Art</option>
-                                                <option value="5">Finance</option>
-                                            </select>
-                                        </div>
-                                        <div class="col-md-3 my-1">
+                                       
+                                      
+                                        <div class="col-md-3">
                                             <button type="submit" class="btn btn-lg btn-warning">Search</button>
                                         </div>
                                     </div>
@@ -157,181 +172,58 @@ $result2=mysqli_query($conn,"SELECT * FROM company,job_post WHERE job_post.compa
         </section>
         <!-- end banner -->
 
-        <!-- start featured categories Section -->
-        <section>
-            <div class="container">
-                <div class="text-center margin-40px-bottom">
-                    <h3 class="no-margin-bottom">Top Job Categories</h3>
-                </div>
-                <div class="row">
-                    <div class="col-lg-3 sm-margin-30px-bottom">
-                        <div class="h-100">
-                            <a href="listing-details.html" class="card bg-img box-hover cover-background border-0 p-4 h-100" data-background="img/content/01.jpg">
-                                <div class="mt-auto position-relative z-index-9">
-                                    <h5 class="text-white">HealthCare</h5>
-                                    <div class="position-relative z-index-9 text-white opacity6">120 jobs</div>
-                                </div>
-                            </a>
-                        </div>
-                    </div>
-                    <div class="col-lg-9">
-                        <div class="row margin-30px-bottom">
-                            <div class="col-md-4 xs-margin-30px-bottom">
-                                <a href="listing-details.html" class="card bg-img box-hover cover-background border-0 p-4" data-background="img/content/02.jpg">
-                                    <div class="mt-auto position-relative z-index-9">
-                                        <h5 class="text-white">Education</h5>
-                                        <div class="position-relative z-index-9 text-white opacity6">12 jobs</div>
-                                    </div>
-                                </a>
-                            </div>
-                            <div class="col-md-4 xs-margin-30px-bottom">
-                                <a href="listing-details.html" class="card bg-img box-hover cover-background border-0 p-4" data-background="img/content/03.jpg">
-                                    <div class="mt-auto position-relative z-index-9">
-                                        <h5 class="text-white">Reataurant</h5>
-                                        <div class="position-relative z-index-9 text-white opacity6">20 jobs</div>
-                                    </div>
-                                </a>
-                            </div>
-                            <div class="col-md-4">
-                                <a href="listing-details.html" class="card bg-img box-hover cover-background border-0 p-4" data-background="img/content/04.jpg">
-                                    <div class="mt-auto position-relative z-index-9">
-                                        <h5 class="text-white">Construction</h5>
-                                        <div class="position-relative z-index-9 text-white opacity6">94 jobs</div>
-                                    </div>
-                                </a>
-                            </div>
-                        </div>
-                        <div class="row">
-                            <div class="col-md-7 xs-margin-30px-bottom">
-                                <a href="listing-details.html" class="card bg-img box-hover cover-background border-0 p-4" data-background="img/content/05.jpg">
-                                    <div class="mt-auto position-relative z-index-9">
-                                        <h5 class="text-white">Design &amp; Art</h5>
-                                        <div class="position-relative z-index-9 text-white opacity6">231 jobs</div>
-                                    </div>
-                                </a>
-                            </div>
-                            <div class="col-md-5">
-                                <a href="listing-details.html" class="card bg-img box-hover cover-background border-0 p-4" data-background="img/content/06.jpg">
-                                    <div class="mt-auto position-relative z-index-9">
-                                        <h5 class="text-white">Finance</h5>
-                                        <div class="position-relative z-index-9 text-white opacity6">45 jobs</div>
-                                    </div>
-                                </a>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </section>
-        <!-- end featured categories Section -->
-
-        <!-- start top company section -->
-        <section class="bg-light">
+    <section class="bg-light">
             <div class="container">
                 <div class="text-center margin-40px-bottom">
                     <h3 class="no-margin-bottom">Top Hiring Companies</h3>
                 </div>
-                <div class="row">
-                    <div class="col-lg-4 col-md-6 margin-30px-bottom">
-                        <div class="card text-dark border-color-light-black h-100">
-                            <div class="card-body padding-20px-tb padding-30px-lr">
-                                <div class="d-flex align-items-center">
+            
+            <div class="row">
+            <?php
+                    $i=0;
+                    while($row = mysqli_fetch_array($result3)) {
+                    ?>
+                <div class="col-lg-4 col-md-6 margin-30px-bottom">
+                    <div class="card text-dark border-color-light-black h-100">
+                    <div class="card-body padding-20px-tb padding-30px-lr">
+                      
+                                                   
+                        
+                        <div class="d-flex align-items-center">
                                     <div class="margin-30px-right top-company">
                                         <img src="img/content/job-1.png" alt="" />
+
                                     </div>
                                     <div>
-                                        <h5 class="no-margin-bottom font-size20"><a href="#" class="text-extra-dark-gray">Accuratna</a></h5>
-                                        <p class="no-margin-bottom">Makati City, Philippines</p>
-                                        <a href="#" class="company-btn">2 Open Positions</a>
+                                        <h5 class="no-margin-bottom font-size20"><a href="jobs_list.php" class="text-extra-dark-gray"><?php echo $row["job_catagory"]; $jc = $row["job_catagory"]; ?></a></h5>
+                                       
+                                         <?php
+                           $conn = new mysqli("localhost", "root", "", "the_right_job");
+                            $query = "SELECT COUNT(job_catagory) FROM job_post where `job_catagory` ='$jc'";
+                            $result4 = mysqli_query($conn,$query);
+                            while ($row = $result4->fetch_assoc()) {
+                                $rx = $row["COUNT(job_catagory)"];
+                                
+                            }
+                            ?>
+
+                                        
+                                        <a href="#" class="company-btn"><?php echo $rx;?> Open Positions</a>
                                     </div>
                                 </div>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="col-lg-4 col-md-6 margin-30px-bottom">
-                        <div class="card text-dark border-color-light-black h-100">
-                            <div class="card-body padding-20px-tb padding-30px-lr">
-                                <div class="d-flex align-items-center">
-                                    <div class="margin-30px-right top-company">
-                                        <img src="img/content/job-2.png" alt="" />
-                                    </div>
-                                    <div>
-                                        <h5 class="no-margin-bottom font-size20"><a href="#" class="text-extra-dark-gray">Creative Tech.</a></h5>
-                                        <p class="no-margin-bottom">Victoria, Canada</p>
-                                        <a href="#" class="company-btn">4 Open Positions</a>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="col-lg-4 col-md-6 margin-30px-bottom">
-                        <div class="card text-dark border-color-light-black h-100">
-                            <div class="card-body padding-20px-tb padding-30px-lr">
-                                <div class="d-flex align-items-center">
-                                    <div class="margin-30px-right top-company">
-                                        <img src="img/content/job-3.png" alt="" />
-                                    </div>
-                                    <div>
-                                        <h5 class="no-margin-bottom font-size20"><a href="#" class="text-extra-dark-gray">Sculptena</a></h5>
-                                        <p class="no-margin-bottom">London, United Kingdom</p>
-                                        <a href="#" class="company-btn">8 Open Positions</a>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="col-lg-4 col-md-6 sm-margin-30px-bottom">
-                        <div class="card text-dark border-color-light-black h-100">
-                            <div class="card-body padding-20px-tb padding-30px-lr">
-                                <div class="d-flex align-items-center">
-                                    <div class="margin-30px-right top-company">
-                                        <img src="img/content/job-4.png" alt="" />
-                                    </div>
-                                    <div>
-                                        <h5 class="no-margin-bottom font-size20"><a href="#" class="text-extra-dark-gray">JAT Infra Pvt Ltd</a></h5>
-                                        <p class="no-margin-bottom">Putrajaya, Malaysia</p>
-                                        <a href="#" class="company-btn">1 Open Positions</a>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="col-lg-4 col-md-6 xs-margin-30px-bottom">
-                        <div class="card text-dark border-color-light-black h-100">
-                            <div class="card-body padding-20px-tb padding-30px-lr">
-                                <div class="d-flex align-items-center">
-                                    <div class="margin-30px-right top-company">
-                                        <img src="img/content/job-5.png" alt="" />
-                                    </div>
-                                    <div>
-                                        <h5 class="no-margin-bottom font-size20"><a href="#" class="text-extra-dark-gray">Relives Healthcare</a></h5>
-                                        <p class="no-margin-bottom">Utrecht, Netherlands</p>
-                                        <a href="#" class="company-btn">5 Open Positions</a>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="col-lg-4 col-md-6">
-                        <div class="card text-dark border-color-light-black h-100">
-                            <div class="card-body padding-20px-tb padding-30px-lr">
-                                <div class="d-flex align-items-center">
-                                    <div class="margin-30px-right top-company">
-                                        <img src="img/content/job-6.png" alt="" />
-                                    </div>
-                                    <div>
-                                        <h5 class="no-margin-bottom font-size20"><a href="#" class="text-extra-dark-gray">VIAP Academy</a></h5>
-                                        <p class="no-margin-bottom">Sydney, Australia</p>
-                                        <a href="#" class="company-btn">6 Open Positions</a>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
                     </div>
                 </div>
+                 </div>
+                 <?php
+                        $i++;
+                        }
+                        ?>
+                 </div>
             </div>
         </section>
-        <!-- end top company section -->
+
+        <!-- start top company section -->
+
 
         <!-- start recent jobs section -->
         <section>
@@ -369,7 +261,7 @@ $result2=mysqli_query($conn,"SELECT * FROM company,job_post WHERE job_post.compa
                                     <div class='col-md-6 xs-margin-10px-bottom'>
                                         <div class='d-block d-sm-flex align-items-center'>
                                             <div class='job-icon bg-light mobile-no-margin-right mobile-margin-20px-bottom margin-30px-right'>
-                                                <img src='img/content/job-1.png' alt='' />
+                                                <img src='https://img.icons8.com/fluency/48/000000/new-job.png'/>
                                             </div>
                                            
                                             <div>
@@ -413,7 +305,7 @@ $result2=mysqli_query($conn,"SELECT * FROM company,job_post WHERE job_post.compa
         <!-- end recent jobs section -->
 
         <!-- start counter section -->
-        <section class="bg-light">
+        <section class="bg-light2">
             <div class="container">
                 <div class="row">
                     <div class="col-md-3 col-6 xs-margin-30px-bottom">
@@ -457,104 +349,13 @@ $result2=mysqli_query($conn,"SELECT * FROM company,job_post WHERE job_post.compa
         </section>
         <!-- end counter section -->
 
-        <!-- start testimonial section -->
-        <section>
-            <div class="container">
-                <div class="text-center margin-40px-bottom">
-                    <h3 class="no-margin-bottom">Testimonials</h3>
-                </div>
-                <div class="owl-carousel owl-theme" id="testmonials-carousel">
-
-                    <div class="border-all padding-30px-all h-100 margin-10px-all">
-                        <div class="d-flex align-items-center margin-20px-bottom testmonial-single">
-                            <div class="margin-20px-right width-55px">
-                                <img src="img/testmonials/t-1.jpg" class="rounded-circle" alt="" />
-                            </div>
-                            <div>
-                                <h6 class="font-size16 no-margin-bottom">Joseph Marine</h6>
-                                <span>Jobseeker</span>
-                            </div>
-                        </div>
-                        <p class="no-margin-bottom">Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation.</p>
-                    </div>
-                    <div class="border-all padding-30px-all h-100 margin-10px-all">
-                        <div class="d-flex align-items-center margin-20px-bottom testmonial-single">
-                            <div class="margin-20px-right width-55px">
-                                <img src="img/testmonials/t-2.jpg" class="rounded-circle" alt="" />
-                            </div>
-                            <div>
-                                <h6 class="font-size16 no-margin-bottom">Lillis Toyadi</h6>
-                                <span>Jobseeker</span>
-                            </div>
-                        </div>
-                        <p class="no-margin-bottom">Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation.</p>
-                    </div>
-                    <div class="border-all padding-30px-all h-100 margin-10px-all">
-                        <div class="d-flex align-items-center margin-20px-bottom testmonial-single">
-                            <div class="margin-20px-right width-55px">
-                                <img src="img/testmonials/t-3.jpg" class="rounded-circle" alt="" />
-                            </div>
-                            <div>
-                                <h6 class="font-size16 no-margin-bottom">Eman Isaliya</h6>
-                                <span>Jobseeker</span>
-                            </div>
-                        </div>
-                        <p class="no-margin-bottom">Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation.</p>
-                    </div>
-                    <div class="border-all padding-30px-all h-100 margin-10px-all">
-                        <div class="d-flex align-items-center margin-20px-bottom testmonial-single">
-                            <div class="margin-20px-right width-55px">
-                                <img src="img/testmonials/t-4.jpg" class="rounded-circle" alt="" />
-                            </div>
-                            <div>
-                                <h6 class="font-size16 no-margin-bottom">Minali Wosaz</h6>
-                                <span>Jobseeker</span>
-                            </div>
-                        </div>
-                        <p class="no-margin-bottom">Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation.</p>
-                    </div>
-
-                </div>
-            </div>
-        </section>
-        <!-- end testimonial section -->
 
        
 
-        <!-- start footer section -->
-        <footer>
-            <div class="footer-bar xs-padding-15px-tb">
-                <div class="container">
-                    <div class="float-right xs-width-100 text-center xs-margin-5px-bottom">
-                        <ul class="social-icon-style no-margin">
-                            <li>
-                                <a href="javascript:void(0)"><i class="fab fa-facebook-f"></i></a>
-                            </li>
-                            <li>
-                                <a href="javascript:void(0)"><i class="fab fa-twitter"></i></a>
-                            </li>
-                            <li>
-                                <a href="javascript:void(0)"><i class="fab fa-instagram"></i></a>
-                            </li>
-                            <li>
-                                <a href="javascript:void(0)"><i class="fab fa-linkedin-in"></i></a>
-                            </li>
-                        </ul>
-                    </div>
-                    <div class="float-left xs-width-100 text-center">
-                        <p class="text-medium-gray font-weight-600 margin-5px-top xs-no-margin-top">&copy; 2020 Job Board is Powered by Chitrakoot Web</p>
-                    </div>
-                </div>
-            </div>
-        </footer>
-        <!-- end footer section -->
+     
 
     </div>
-    <!-- end main-wrapper section -->
-
-    <!-- start scroll to top -->
-    <a href="javascript:void(0)" class="scroll-to-top"><i class="fas fa-angle-up" aria-hidden="true"></i></a>
-    <!-- end scroll to top -->
+  
 
     <!-- all js include start -->
 

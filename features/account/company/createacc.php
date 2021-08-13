@@ -11,6 +11,8 @@ if (isset($_POST['submit'])) {
         $confirm_password = $_POST["confirm_password"];
         $profile_description = $_POST['profile_description'];
         $address = $_POST['address'];
+         $admin = $_POST['admin'];
+       
        
        
        
@@ -42,8 +44,9 @@ try {
             $conn = new PDO("mysql:host=$servername;dbname=the_right_job", $username, $pass);
             $conn->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
             
+           
                 
-            $sql = "INSERT into company (`company_name`,`email`, `password`, `profile_description`, `address`) VALUES ('$company_name','$email','$password','$profile_description','$address')";
+            $sql = "INSERT into company (`company_name`,`email`, `password`, `profile_description`, `address`,`admin`) VALUES ('$company_name','$email','$password','$profile_description','$address','$admin')";
 
             $conn->exec($sql);
             $error = '<div class="alert alert-success">Thank you for your register. You can login now.</div>';

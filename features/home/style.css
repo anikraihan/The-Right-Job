@@ -1,0 +1,218 @@
+body{
+    background: #fff;
+}
+.emp-profile{
+    padding: 3%;
+    margin-top: 3%;
+    margin-bottom: 3%;
+    border-radius: 0.5rem;
+    background: #fff;
+}
+.profile-img{
+    text-align: center;
+}
+.profile-img img{
+    width: 70%;
+    height: 100%;
+}
+.profile-img .file {
+    position: relative;
+    overflow: hidden;
+    margin-top: -20%;
+    width: 70%;
+    border: none;
+    border-radius: 0;
+    font-size: 15px;
+    background: #212529b8;
+}
+.profile-img .file input {
+    position: absolute;
+    opacity: 0;
+    right: 0;
+    top: 0;
+}
+.profile-head h5{
+    color: #333;
+}
+.profile-head h6{
+    color: #0062cc;
+}
+.profile-edit-btn{
+    border: none;
+    border-radius: 1.5rem;
+    width: 70%;
+    padding: 2%;
+    font-weight: 600;
+    color: #6c757d;
+    cursor: pointer;
+}
+.proile-rating{
+    font-size: 12px;
+    color: #818182;
+    margin-top: 5%;
+}
+.proile-rating span{
+    color: #495057;
+    font-size: 15px;
+    font-weight: 600;
+}
+.profile-head .nav-tabs{
+    margin-bottom:5%;
+}
+.profile-head .nav-tabs .nav-link{
+    font-weight:600;
+    border: none;
+}
+.profile-head .nav-tabs .nav-link.active{
+    border: none;
+    border-bottom:2px solid #0062cc;
+}
+.profile-work{
+    padding: 14%;
+    margin-top: -15%;
+}
+.profile-work p{
+    font-size: 12px;
+    color: #818182;
+    font-weight: 600;
+    margin-top: 10%;
+}
+.profile-work a{
+    text-decoration: none;
+    color: #495057;
+    font-weight: 600;
+    font-size: 14px;
+}
+.profile-work ul{
+    list-style: none;
+}
+.profile-tab label{
+    font-weight: 600;
+}
+.profile-tab p{
+    font-weight: 600;
+    color: #0062cc;
+}
+.testimonial_area {
+  padding: 100px 0;
+}
+
+@media (max-width: 767px) {
+  /* line 1, ../../Arafath/CL/December/235. Job board/HTML/scss/_testmonial.scss */
+  .testimonial_area {
+    padding: 50px 0;
+  }
+}
+
+@media (min-width: 768px) and (max-width: 991px) {
+  /* line 1, ../../Arafath/CL/December/235. Job board/HTML/scss/_testmonial.scss */
+  .testimonial_area {
+    padding: 100px 0;
+  }
+}
+
+@media (max-width: 767px) {
+  /* line 9, ../../Arafath/CL/December/235. Job board/HTML/scss/_testmonial.scss */
+  .testimonial_area .single_testmonial {
+    display: block !important;
+  }
+}
+
+/* line 13, ../../Arafath/CL/December/235. Job board/HTML/scss/_testmonial.scss */
+.testimonial_area .single_testmonial .thumb {
+  position: relative;
+  -webkit-border-radius: 50%;
+  -moz-border-radius: 50%;
+  border-radius: 50%;
+  width: 228px;
+  height: 228px;
+}
+
+/* line 18, ../../Arafath/CL/December/235. Job board/HTML/scss/_testmonial.scss */
+.testimonial_area .single_testmonial .thumb img {
+  -webkit-border-radius: 50%;
+  -moz-border-radius: 50%;
+  border-radius: 50%;
+}
+
+/* line 21, ../../Arafath/CL/December/235. Job board/HTML/scss/_testmonial.scss */
+.testimonial_area .single_testmonial .thumb .quote_icon {
+  position: absolute;
+  width: 58px;
+  height: 58px;
+  -webkit-border-radius: 50%;
+  -moz-border-radius: 50%;
+  border-radius: 50%;
+  background: #00D363;
+  color: #fff;
+  text-align: center;
+  line-height: 58px;
+  right: 0;
+  bottom: 0;
+}
+
+/* line 34, ../../Arafath/CL/December/235. Job board/HTML/scss/_testmonial.scss */
+.testimonial_area .single_testmonial .info {
+  padding-left: 66px;
+  padding-right: 15px;
+}
+
+@media (max-width: 767px) {
+  /* line 34, ../../Arafath/CL/December/235. Job board/HTML/scss/_testmonial.scss */
+  .testimonial_area .single_testmonial .info {
+    padding: 0;
+    margin-top: 10px;
+  }
+}
+
+/* line 41, ../../Arafath/CL/December/235. Job board/HTML/scss/_testmonial.scss */
+.testimonial_area .single_testmonial .info p {
+  font-size: 18px;
+  color: #040E27;
+  line-height: 32px;
+  margin-bottom: 18px;
+}
+
+/* line 47, ../../Arafath/CL/December/235. Job board/HTML/scss/_testmonial.scss */
+.testimonial_area .single_testmonial .info span {
+  color: #7A838B;
+  font-size: 16px;
+  font-weight: 400;
+  display: block;
+}
+
+/* line 55, ../../Arafath/CL/December/235. Job board/HTML/scss/_testmonial.scss */
+.testimonial_area .owl-carousel .owl-item img {
+  display: inline-block;
+  width: auto;
+}
+
+/* line 61, ../../Arafath/CL/December/235. Job board/HTML/scss/_testmonial.scss */
+.testimonial_area .owl-carousel .owl-nav div {
+  font-size: 15px;
+  line-height: 50px;
+  border: 0;
+  left: auto;
+  background: #E6F3FF;
+  color: #0A8CFF;
+  right: 0;
+  left: auto;
+  line-height: 51px;
+}
+
+/* line 71, ../../Arafath/CL/December/235. Job board/HTML/scss/_testmonial.scss */
+.testimonial_area .owl-carousel .owl-nav div:hover {
+  border: none;
+  background: #7FC1FC;
+  color: #fff;
+}
+
+/* line 76, ../../Arafath/CL/December/235. Job board/HTML/scss/_testmonial.scss */
+.testimonial_area .owl-carousel .owl-nav div.owl-next {
+  margin-top: -30px;
+}
+
+/* line 79, ../../Arafath/CL/December/235. Job board/HTML/scss/_testmonial.scss */
+.testimonial_area .owl-carousel .owl-nav div.owl-prev {
+  margin-top: 30px;
+}
