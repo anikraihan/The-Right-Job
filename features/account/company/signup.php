@@ -57,7 +57,7 @@
   
     <label for="exampleInputEmail1"><i class="far fa-address-card" aria-hidden="true"></i></i> Company address</label>
     <input type="text" class="form-control mb-3" name="address" id="exampleInputEmail1" aria-describedby="emailHelp" placeholder="Company address" required>
-
+ <input type="hidden" class="form-control mb-3" name="admin" value='company' >
     
     
         <div class="form-row mb-3">

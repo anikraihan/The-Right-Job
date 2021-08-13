@@ -12,6 +12,7 @@ if (isset($_POST['submit'])) {
         $confirm_password = $_POST["confirm_password"];
         $gender = $_POST['gender'];
         $contact_number = $_POST['contact_number'];
+        $admin = $_POST['admin'];
        
        
        
@@ -44,7 +45,7 @@ try {
             $conn->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
             
                 
-            $sql = "INSERT into user_account (`first_name`,`last_name`,`email`, `password`, `gender`, `contact_number`) VALUES ('$first_name','$last_name','$email','$password','$gender','$contact_number')";
+            $sql = "INSERT into user_account (`first_name`,`last_name`,`email`, `password`, `gender`, `contact_number`,`admin`) VALUES ('$first_name','$last_name','$email','$password','$gender','$contact_number','$admin')";
 
             $conn->exec($sql);
             $error = '<div class="alert alert-success">Thank you for your register. You can login now.</div>';

@@ -78,11 +78,12 @@ $result2=mysqli_query($conn,"SELECT * FROM company,job_post WHERE job_post.compa
                                    
                                         <ul class="navbar-nav ml-auto" id="nav" style="display: none;">
                                         <li><a href="home.php">Home</a></li>
-                                     <li><a href="../account/logout.php">Logout</a></li>
-                                
-                                        
-                                      
+                                    
                                         <li><a href="jobs_list.php">jobs list</a></li>
+                                        <li><a href="post_job.php">Post a Job</a></li>
+                                        <li><a href="post_review.php">Post a review</a></li>
+                                       
+                                           <li><a href="../account/logout.php" class="btn btn-warning p-3" >Logout</a></li>
                                     </ul>
                                     <!-- end menu area -->
 
@@ -97,17 +98,33 @@ $result2=mysqli_query($conn,"SELECT * FROM company,job_post WHERE job_post.compa
             </div>
         </header>
     
-   
+    <div class="bradcam_area_2 bradcam_bg_2">
+        <div class="container">
+          
+            <div class="row">
+                <div class="col-xl-5">
+                    <div class="bradcam_text">
+                        <h3>Give a review</h3>
+                        
+      
+                            
+                            <h3 style="color: #485460" class="wow fadeInLeft" data-wow-duration="1s" data-wow-delay=".2s"> 100+ jobs listed</h3>
+                             
+                    
+                    </div>
+                </div>
 
-  
-       
-            
-           
-                
-                <!-- start page main wrapper -->
-                <div id="main-wrapper">
-                     <!-- start recent jobs section -->
-        <section>
+            <div class="col-xl-6 d-none d-lg-block text-right" >
+        
+        <img class="wave3 wow shake" data-wow-duration="1s" data-wow-delay=".2s" src="img/review.svg">
+
+            </div>
+
+            </div>
+        </div>
+          </div> 
+   
+ <section>
             <div class="container">
                 <div class="text-center margin-40px-bottom">
                     <h3 class="no-margin-bottom">Recent Job</h3>
@@ -142,7 +159,7 @@ $result2=mysqli_query($conn,"SELECT * FROM company,job_post WHERE job_post.compa
                                     <div class='col-md-6 xs-margin-10px-bottom'>
                                         <div class='d-block d-sm-flex align-items-center'>
                                             <div class='job-icon bg-light mobile-no-margin-right mobile-margin-20px-bottom margin-30px-right'>
-                                                <img src='img/content/job-1.png' alt='' />
+                                                <img src='https://img.icons8.com/fluency/48/000000/new-job.png'/>
                                             </div>
                                            
                                             <div>
@@ -176,27 +193,19 @@ $result2=mysqli_query($conn,"SELECT * FROM company,job_post WHERE job_post.compa
                        
                       
                        
-                                       </div>
+                        
+                </div>
             </div>
         </section>
-        <!-- end recent jobs section -->
-                    <!-- row -->
-                </div>
-                <!-- end page main wrapper -->
-                <div class="page-footer">
-                    <p>Copyright &copy; 2020 Job Board All rights reserved.</p>
-                </div>
-            </div>
-            <!-- end page inner -->
-
-            <!-- start page right sidebar -->
-
+  
+       
+            
+           
+       
+            
            
 
-        </div>
-        <!-- end page content -->
-    </div>
-    <!-- end page container -->
+</body>
 
     <!-- all js include start -->
 
@@ -208,6 +217,5 @@ $result2=mysqli_query($conn,"SELECT * FROM company,job_post WHERE job_post.compa
     <!-- custom scripts -->
     <script src="js/main.js"></script>
 
-</body>
 
 </html>
