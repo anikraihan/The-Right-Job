@@ -56,6 +56,7 @@
 
     <label for="exampleInputEmail1"><i class="fa fa-envelope" aria-hidden="true"></i></i>  Email address</label>
     <input type="email" class="form-control mb-3" name="email" id="exampleInputEmail1" aria-describedby="emailHelp" placeholder="Enter a valid email" required>
+    <input type="hidden" class="form-control mb-3" name="admin" value="jobseeker">
     
    
 
@@ -63,7 +64,7 @@
   <div class="input-group-prepend">
     <span class="input-group-text" id="inputGroup-sizing-default">+880</span>
   </div>
-  <input type="number" min=0 class="form-control" name="profile_description" id="exampleInputEmail1" aria-describedby="emailHelp" placeholder="contact_number" required>
+  <input type="number" name="contact_number" min=0   class="form-control" name="profile_description" id="exampleInputEmail1" aria-describedby="emailHelp" placeholder="contact number" required>
 </div>
   
     

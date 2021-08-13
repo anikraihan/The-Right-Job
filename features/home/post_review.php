@@ -10,14 +10,15 @@ $admin = $_SESSION["utype"];
 
 
 if ($admin=="company") {
-   
-    
-}
-else{
-         $error = '<div class="alert alert-danger">Log into company profile to post a job</div>';
+    $error = '<div class="alert alert-danger">Log into jobseeker profile for posting review.</div>';
     session_destroy();
    
-    header("location: ../account/company/company_login.php?error=$error");
+    header("location: ../account/jobseeker/jobseeker_login.php?error=$error");
+
+}
+else{
+
+        
     }
 
 
@@ -41,7 +42,7 @@ else{
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>Create a Job post</title>
+    <title>Create a review post</title>
 
  
 
@@ -53,7 +54,7 @@ else{
 
     <!-- core style css -->
     <link href="css/styles.css" rel="stylesheet" />
-    
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
  
 
 </head>
@@ -83,11 +84,12 @@ else{
                                     <!-- start menu area -->
                                     <ul class="navbar-nav ml-auto" id="nav" style="display: none;">
                                         <li><a href="home.php">Home</a></li>
-                                     
+                                      
                                         <li><a href="jobs_list.php">jobs list</a></li>
                                         <li><a href="post_job.php">Post a Job</a></li>
                                         <li><a href="post_review.php">Post a review</a></li>
-                                        <li><a href="../account/logout.php" class="btn btn-warning p-3" >Logout</a></li>
+                                       
+                                            <li><a href="../account/logout.php" class="btn btn-warning p-3" >Logout</a></li>
                                     </ul>
                                     <!-- end menu area -->
 
@@ -110,11 +112,11 @@ else{
             <div class="row">
                 <div class="col-xl-5">
                     <div class="bradcam_text">
-                        <h3>Post A Job</h3>
-                        <?php echo $id;?>
+                        <h3>Give a review</h3>
+                        
       
                             
-                            <h3 style="color: #485460" class="wow fadeInLeft" data-wow-duration="1s" data-wow-delay=".2s"> 100+ Jobs listed</h3>
+                            <h3 style="color: #485460" class="wow fadeInLeft" data-wow-duration="1s" data-wow-delay=".2s"> 100+ reviews listed</h3>
                              
                     
                     </div>
@@ -122,7 +124,7 @@ else{
 
             <div class="col-xl-6 d-none d-lg-block text-right" >
         
-        <img class="wave3 wow shake" data-wow-duration="1s" data-wow-delay=".2s" src="img/job.svg">
+        <img class="wave3 wow shake" data-wow-duration="1s" data-wow-delay=".2s" src="img/review.svg">
 
             </div>
 
@@ -137,78 +139,67 @@ else{
           <div class="review_form white-bg">
   <img class="wave" src="img/type.svg">
           
-                        <h4>Apply for the job</h4>
-                        <form method="post" name="regform"  class="register-form" id="register-form"  action="post_job-method.php" >
+                        <h4>Write your review</h4>
+                        <form method="post" name="regform"  class="register-form" id="register-form"  action="post_review-method.php" >
                             <div class="row">
                                 
-                                <div class="col-md-4">
-                   
-									<select class="form-control" name="job_catagory" placeholder="Job Category">
-                                <option>Developer</option>
-                                <option>HR</option>
-                                <option>Marketing</option>
-                                <option>Finance</option>
-                                <option>Ecommerce</option>
-                                <option>Engineer</option>
-                                <option>Other</option>
-                            </select>
-									
-                                </div>
-								
-								<div class="col-md-4">
-                   
-									<select class="form-control" name="job_type" placeholder="Job type">
-                                <option>Full Time</option>
-                                <option>Part Time</option>
-                               
-                            </select>
-									
-                                </div>
-
-                                     <div class="col-md-11">
-                                <div class="form-group">
-                                        <textarea class="form-control" name="job_description" id="" cols="30" rows="10" placeholder="job_description"></textarea>
-                                    </div>
-
-                                </div>
-								
-                               
-                                <div class="col-md-4">
+                             
+                               <div class="col-md-6">
                                     <div class="form-group">
-                                            <input class="form-control" type="text" name="position" placeholder="position" >
-                                    </div>
-                                </div>
-                                 <div class="col-md-2">
-                                    <div class="form-group">
-                                            <input class="form-control" type="number" name="salary" placeholder="Salary" >
+                                         <label for="validationCustom01" ><i class="fa fa-user" aria-hidden="true"></i> First Name</label>
+                                            <input class="form-control" type="text" name="first_name" placeholder="first name" >
                                     </div>
                                 </div>
                                 <div class="col-md-6">
                                     <div class="form-group">
-                                           <input class="form-control" type="number" name="vacancy" placeholder="vacancy" >
+                                         <label for="validationCustom01" > Last Name</label>
+                                            <input class="form-control" type="text" name="last_name" placeholder="last name" >
                                     </div>
                                 </div>
-                              
-                                <div class="col-md-4">
+                                
+                                <div class="col-md-6">
                                     <div class="form-group">
-                                        <input class="form-control" type="text" name="job_location" placeholder="job_location">
+                                         <label for="validationCustom01" ><i class="fa fa-building" aria-hidden="true"></i>  Company Name</label>
+                                            <input class="form-control" type="text" name="company_name" placeholder="company name" >
                                     </div>
                                 </div>
-                              
 
-                                    <div class="col-md-11">
+                                <div class="col-md-6">
+                                    <div class="form-group">
+                                         <label for="validationCustom01" ><i class="fa fa-address-card" aria-hidden="true"></i> Post</label>
+                                            <input class="form-control" type="text" name="post" placeholder="post" >
+                                    </div>
+                                </div>
+                               
+                                
+                                     <div class="col-md-12">
                                 <div class="form-group">
-                                        <textarea class="form-control" name="expectation" id="" cols="30" rows="10" placeholder="expectation"></textarea>
+                                     <label for="validationCustom01" >  Decribe your work ambience</label>
+                                        <textarea class="form-control" name="ambience" id="" cols="30" rows="10" placeholder="ambience"></textarea>
                                     </div>
 
                                 </div>
-
+                                   <div class="col-md-4">
+                                    <label for="validationCustom01" ><i class="fa fa-star" aria-hidden="true"></i>  Rating</label>
+                   
+                                    <select class="form-control" name="rating" placeholder="rating">
+                                <option>1</option>
+                                <option>2</option>
+                                <option>3</option>
+                                <option>4</option>
+                                <option>5</option>
+                               
+                            </select>
+                                    
+                                </div>
+                                
+                               
                                  
 
 
                                 
                                 <div class="col-md-12">
-                                      <input type="submit" name="submit" id="signup" class="btn btn-primary btn-lg btn-block" value="Create new job"/>
+                                      <input type="submit" name="submit" id="signup" class="btn btn-dark mt-4" value="Save your review"/>
                                 </div>
 
                             </div>
