@@ -10,7 +10,7 @@ $admin = $_SESSION["utype"];
 
 
 if ($admin=="company") {
-    $error = '<div class="alert alert-danger">Log into jobseeker profile for posting review.</div>';
+    $error = '<div class="alert alert-danger">Profile dashboard is only for jobseeker</div>';
     session_destroy();
    
     header("location: ../account/jobseeker/jobseeker_login.php?error=$error");
@@ -118,6 +118,17 @@ $result7=mysqli_query($conn,"SELECT * FROM seeker_profile where user_id = $id");
                 </div>
             </div>
         </header>
+             <span>
+            <?php
+ 
+
+
+                  if(isset($_GET['error']))
+                   echo $_GET['error'];
+   
+ 
+                 ?>
+              </span>
         <!-- end header section -->
 
 

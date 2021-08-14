@@ -49,7 +49,7 @@ if (isset($_POST['submit'])) {
                   
 
 
-                    if ($insert) {
+                    if ($update) {
                        $error = '<div class="alert alert-success">Profile updated successfully!</div>';
                     } else {
                          $error = '<div class="alert alert-danger">Update failed!. Please try again. </div>';

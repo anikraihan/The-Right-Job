@@ -94,6 +94,8 @@ $result3 = mysqli_query($conn,"SELECT * FROM job_post group by job_catagory orde
                                       
                                         <li><a href="jobs_list.php">jobs list</a></li>
                                         <li><a href="post_job.php">Post a Job</a></li>
+                                          <li><a href="profile.php">Dashboard</a></li>
+                                          <li><a href="update_profile.php">Create profile</a></li>
                                         <li><a href="post_review.php">Post a review</a></li>
                                        
                                           <li><a href="../account/logout.php" class="btn btn-warning p-3" >Logout</a></li>
@@ -171,6 +173,15 @@ $result3 = mysqli_query($conn,"SELECT * FROM job_post group by job_catagory orde
 
         </section>
         <!-- end banner -->
+
+
+            <div class="container">
+           
+          
+            <br />
+            <div id="result"></div>
+        </div>
+        <div style="clear:both"></div>
 
     <section class="bg-light">
             <div class="container">
@@ -371,5 +382,35 @@ $result3 = mysqli_query($conn,"SELECT * FROM job_post group by job_catagory orde
     <!-- all js include end -->
 
 </body>
+
+ <script>
+  $(document).ready(function(){
+    load_data();
+    function load_data(query)
+    {
+      $.ajax({
+        url:"fetch.php",
+        method:"post",
+        data:{query:query},
+        success:function(data)
+        {
+          $('#result').html(data);
+        }
+      });
+    }
+
+    $('#search_text').keyup(function(){
+      var search = $(this).val();
+      if(search != '')
+      {
+        load_data(search);
+      }
+      else
+      {
+        load_data();
+      }
+    });
+  });
+  </script>
 
 </html>
