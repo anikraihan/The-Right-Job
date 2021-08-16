@@ -13,14 +13,26 @@ else{
 
 
 <?php
+                           $conn = new mysqli("localhost", "root", "", "the_right_job");
+                            $query = "select id from user_account where email ='".$_SESSION['email']."'";
+                            $result6 = mysqli_query($conn,$query);
+                            while ($row = $result6->fetch_assoc()) {
+                                $id = $row['id']; 
+                                
+                            }
+                            ?>
+
+
+
+<?php
 
 $conn = new mysqli("localhost", "root", "", "the_right_job");
 
 
 
 
-$result=mysqli_query($conn,"SELECT * FROM job_post");
-$result2=mysqli_query($conn,"SELECT * FROM company,job_post WHERE job_post.company_id=company.id");
+$result=mysqli_query($conn,"SELECT * FROM job_post_activity where user_id = $id");
+$result2=mysqli_query($conn,"SELECT * FROM job_post_activity,job_post WHERE job_post_activity.job_post_id = job_post.id");
 
 
 ?>
@@ -139,16 +151,17 @@ $result2=mysqli_query($conn,"SELECT * FROM company,job_post WHERE job_post.compa
                       <?php
                     $i=0;
                     while($row = mysqli_fetch_array($result) AND $row2 = mysqli_fetch_array($result2)) {
-                         $id = $row['id'];
-                           $company_id = $row['company_id'];
-                           $job_description = $row['job_description'];
-                                $job_type = $row['job_type'];
-                                $salary = $row['salary'];
-                                 $position = $row['position'];
-                                 $vacancy = $row['vacancy'];
-                                 $expectation = $row['expectation'];
-                                 $job_location = $row['job_location'];
-                                 $company_name = $row2['company_name'];
+                         $id = $row2['id'];
+                          $company_id = $row2['company_id'];
+                          $cname = $row2['cname'];
+                          $job_catagory = $row2['job_catagory'];
+                          $job_description = $row2['job_description'];
+                          $job_type = $row2['job_type'];
+                          $salary = $row2['salary'];
+                          $position = $row2['position'];
+                          $vacancy = $row2['vacancy'];
+                          $job_location = $row2['job_location'];
+
                                 
 
                                  
@@ -166,7 +179,7 @@ $result2=mysqli_query($conn,"SELECT * FROM company,job_post WHERE job_post.compa
 
 
                                                 <span class='text-secondary'>{$position}</span>
-                                            <br> {$company_name}
+                                            <br> {$cname}
 
                                                <br> ৳{$salary}
 

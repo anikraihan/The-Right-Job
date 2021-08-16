@@ -267,10 +267,10 @@ $result12=mysqli_query($conn,"SELECT * FROM post_reviews");
                                  $job_location = $row['job_location'];
                                  $company_name = $row2['company_name'];
                                 
-                            echo "<div class='card'>
+
                                  
 
-                       <a class='text-dark border-color-light-black margin-30px-bottom' href='job-details.php?jobid=$jpost&cid=$company_id'>
+                       echo  "<a class='card text-dark border-color-light-black margin-30px-bottom' href='job-details.php?jobid=$jpost&cid=$company_id'>
                            <div class='card-body padding-20px-tb padding-30px-lr'>
                                 <div class='row justify-content-sm-between align-items-sm-center'>
                                     <div class='col-md-6 xs-margin-10px-bottom'>
@@ -292,24 +292,24 @@ $result12=mysqli_query($conn,"SELECT * FROM post_reviews");
 
                                             
                                         </div>
-                                        
+                                         <a class='btn btn-primary'  href='applied-job_method.php?jobpost=$jpost&com=$company_id'>Apply for the job</a>
                                     </div>
 
 
-                              <div class=' col-md-3 text-secondary xs-margin-10px-bottom'>
+                                      <p class='card__apply'>
+        <a class='card__link' href='applied-job_method.php?jobpost=$jpost&com=$company_id'>Apply Now <i class='fas fa-arrow-right'></i></a>
+      </p>
+                                    <div class='col-md-3 text-secondary xs-margin-10px-bottom'>
                                         <span class='ti-location-pin margin-10px-right'></span>{$job_location}
                                         <br> {$job_type}
-                                        
+
                                     </div>
                                     
-                                     <div class='col-md-3 col-xl-2 text-primary text-left text-md-right'>
-                                        Read details →
-                                    </div>
+                                    
                             
                                 </div>
                             </div>
-                        </a>
-                        </div>"
+                        </a>"
                         ;
                       }
                            
