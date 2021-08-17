@@ -86,9 +86,9 @@ else{
                                     <ul class="navbar-nav ml-auto" id="nav" style="display: none;">
                                         <li><a href="home.php">Home</a></li>
                                      
-                                        <li><a href="jobs_list.php">jobs list</a></li>
+                                        <li><a href="company-profile.php">Company dashboard</a></li>
                                         <li><a href="post_job.php">Post a Job</a></li>
-                                        <li><a href="post_review.php">Post a review</a></li>
+                                       
                                         <li><a href="../account/logout.php" class="btn btn-warning p-3" >Logout</a></li>
                                     </ul>
                                     <!-- end menu area -->

@@ -97,11 +97,12 @@ $result7=mysqli_query($conn,"SELECT * FROM seeker_profile where user_id = $id");
                                     <ul class="navbar-nav ml-auto" id="nav" style="display: none;">
                                         <li><a href="home.php">Home</a></li>
                                      
+                                      <li><a href="update_profile.php">Create profile</a></li>
                                 
                                         <li><a href="profile.php">Profile</a></li>
                                       
                                         <li><a href="jobs_list.php">jobs list</a></li>
-                                        <li><a href="post_job.php">Post a Job</a></li>
+                                    
                                         <li><a href="post_review.php">Post a review</a></li>
                                        
                                           <li><a href="../account/logout.php" class="btn btn-warning p-3" >Logout</a></li>

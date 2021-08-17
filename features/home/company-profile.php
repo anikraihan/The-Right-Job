@@ -10,25 +10,26 @@ $admin = $_SESSION["utype"];
 
 
 if ($admin=="company") {
-     $error = '<div class="alert alert-danger">Log into jobseeker profile to post a job</div>';
-    session_destroy();
    
-    header("location: ../account/jobseeker/jobseeker_login.php?error=$error");
-    
     
 }
 else{
-       
+         $error = '<div class="alert alert-danger">Log into company profile to post a job</div>';
+    session_destroy();
+   
+    header("location: ../account/company/company_login.php?error=$error");
+    }
 
 
- }  
+   
 
 ?>
 
 
+
 <?php
                            $conn = new mysqli("localhost", "root", "", "the_right_job");
-                            $query = "select id from user_account where email ='".$_SESSION['email']."'";
+                            $query = "select id from company where email ='".$_SESSION['email']."'";
                             $result6 = mysqli_query($conn,$query);
                             while ($row = $result6->fetch_assoc()) {
                                 $id = $row['id']; 
@@ -45,9 +46,9 @@ $conn = new mysqli("localhost", "root", "", "the_right_job");
 
 
 
-$result=mysqli_query($conn,"SELECT * FROM job_post_activity where user_id = $id");
-$result2=mysqli_query($conn,"SELECT * FROM job_post_activity,job_post WHERE job_post_activity.job_post_id = job_post.id AND user_id = $id");
-
+$result=mysqli_query($conn,"SELECT * FROM job_post_activity where company_id = $id");
+$result2=mysqli_query($conn,"SELECT * FROM job_post_activity,job_post WHERE job_post_activity.job_post_id = job_post.id");
+$result7=mysqli_query($conn,"SELECT * FROM company where id = $id");
 
 ?>
 
@@ -64,7 +65,7 @@ $result2=mysqli_query($conn,"SELECT * FROM job_post_activity,job_post WHERE job_
     <meta name="description" content="The Right Job" />
 
     <!-- title  -->
-    <title>My applications</title>
+    <title>Company dashboard</title>
 
  
 
@@ -105,8 +106,8 @@ $result2=mysqli_query($conn,"SELECT * FROM job_post_activity,job_post WHERE job_
                                         <ul class="navbar-nav ml-auto" id="nav" style="display: none;">
                                         <li><a href="home.php">Home</a></li>
                                     
-                                        <li><a href="jobs_list.php">jobs list</a></li>
                                         
+                                        <li><a href="post_job.php">Post a Job</a></li>
                                         <li><a href="post_review.php">Post a review</a></li>
                                        
                                            <li><a href="../account/logout.php" class="btn btn-warning p-3" >Logout</a></li>
@@ -130,13 +131,32 @@ $result2=mysqli_query($conn,"SELECT * FROM job_post_activity,job_post WHERE job_
             <div class="row">
                 <div class="col-xl-5">
                     <div class="bradcam_text">
-                        <h3>Give a review</h3>
+
+
+                          <?php
+      $i=0;
+      while($row = mysqli_fetch_array($result7)) {
+        $cid = $row['id'];
+          $comapny_name = $row['company_name'];
+          $email = $row['email'];
+              $profile_description = $row['profile_description'];
+                $address = $row['address'];
+               
+                              
+
+               echo     
+                        '<h3>'.$row['company_name'].'</h3>
+
+
+                       
                         
       
                             
-                            <h3 style="color: #485460" class="wow fadeInLeft" data-wow-duration="1s" data-wow-delay=".2s"> 100+ jobs listed</h3>
+                            <h3 style="color: #485460" class="wow fadeInLeft" data-wow-duration="1s" data-wow-delay=".2s"> '.$row['address'].'</h3>
                              
-                    
+                     ' ;}
+
+                        ?>
                     </div>
                 </div>
 
@@ -149,11 +169,18 @@ $result2=mysqli_query($conn,"SELECT * FROM job_post_activity,job_post WHERE job_
             </div>
         </div>
           </div> 
-   
- <section>
+   <section class="signup">
+            <div class="container">
+                <div class="signup-content">
+                    <div class="signup-form">
+
+    <div class="container emp-profile">
+            <form method="post">
+                <div class="row">
+
             <div class="container">
                 <div class="text-center margin-40px-bottom">
-                    <h3 class="no-margin-bottom">My applications</h3>
+                    <h3 class="no-margin-bottom">Recent Job Applications</h3>
                 </div>
 
                 <div class="row">
@@ -175,13 +202,15 @@ $result2=mysqli_query($conn,"SELECT * FROM job_post_activity,job_post WHERE job_
                           $position = $row2['position'];
                           $vacancy = $row2['vacancy'];
                           $job_location = $row2['job_location'];
-                          $action_name = $row['action_name'];
+                          $user_id = $row['user_id'];
+                           $app_id = $row['id'];
+
 
                                 
 
                                  
 
-                       echo  "<a class='card text-dark border-color-light-black margin-30px-bottom' href=#>
+                       echo  "<a class='card text-dark border-color-light-black margin-30px-bottom' href='applicants-profile.php?user_id=$user_id&jobid=$id&app_id=$app_id'>
                            <div class='card-body padding-20px-tb padding-30px-lr'>
                                 <div class='row justify-content-sm-between align-items-sm-center'>
                                     <div class='col-md-6 xs-margin-10px-bottom'>
@@ -193,7 +222,7 @@ $result2=mysqli_query($conn,"SELECT * FROM job_post_activity,job_post WHERE job_
                                             <div>
 
 
-                                                <span class='text-secondary'>Applying for: {$position}</span>
+                                                <span class='text-secondary'>{$position}</span>
                                             <br> {$cname}
 
                                                <br> ৳{$salary}
@@ -206,10 +235,10 @@ $result2=mysqli_query($conn,"SELECT * FROM job_post_activity,job_post WHERE job_
                                     </div>
                                     <div class='col-md-3 text-secondary xs-margin-10px-bottom'>
                                         <span class='ti-location-pin margin-10px-right'></span>{$job_location}
-                                        <br> {$job_type}
+                                        <br> {$user_id}
                                     </div>
                                     <div class='col-md-3 col-xl-2 text-primary text-left text-md-right'>
-                                        {$action_name}
+                                        View details →
                                     </div>
                                 </div>
                             </div>

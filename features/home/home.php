@@ -4,6 +4,7 @@ session_start();
 
 if(isset($_SESSION['email'])) {
 $email = $_SESSION["email"];
+$admin = $_SESSION["utype"];
 
 }
 else{
@@ -73,7 +74,7 @@ $result12=mysqli_query($conn,"SELECT * FROM post_reviews");
             <div class="navbar-default">
                
 
-                <div class="container">
+                <div class="container-fluid">
                     <div class="row align-items-center">
                         <div class="col-md-12">
                             <div class="menu_area">
@@ -96,12 +97,13 @@ $result12=mysqli_query($conn,"SELECT * FROM post_reviews");
                                 
                                         
                                       
-                                        <li><a href="jobs_list.php">jobs list</a></li>
+                                        
                                         <li><a href="post_job.php">Post a Job</a></li>
-                                          <li><a href="profile.php">Dashboard</a></li>
-                                          <li><a href="update_profile.php">Create profile</a></li>
-                                          <li><a href="job-details.php">Job details</a></li>
-                                        <li><a href="post_review.php">Post a review</a></li>
+                                          <li><a href="profile.php">Jobseeker Dashboard</a></li>
+                                         
+                                        
+                                        <li><a href="company-profile.php">Company dashboard</a></li>
+                                        
                                        
                                           <li><a href="../account/logout.php" class="btn btn-warning p-3" >Logout</a></li>
                                         
@@ -459,5 +461,8 @@ $result12=mysqli_query($conn,"SELECT * FROM post_reviews");
     });
   });
   </script>
+
+
+
 
 </html>
