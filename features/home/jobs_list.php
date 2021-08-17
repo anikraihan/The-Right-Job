@@ -106,7 +106,9 @@ $result2=mysqli_query($conn,"SELECT * FROM job_post_activity,job_post WHERE job_
                                         <li><a href="home.php">Home</a></li>
                                     
                                         <li><a href="jobs_list.php">jobs list</a></li>
-                                        
+
+                                        <li><a href="post_job.php">Post a Job</a></li>
+
                                         <li><a href="post_review.php">Post a review</a></li>
                                        
                                            <li><a href="../account/logout.php" class="btn btn-warning p-3" >Logout</a></li>

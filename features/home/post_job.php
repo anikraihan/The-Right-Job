@@ -26,13 +26,14 @@ else{
 ?>
  <?php
                            $conn = new mysqli("localhost", "root", "", "the_right_job");
+
                             $query = "select * from company where email ='".$_SESSION['email']."'";
                             $result6 = mysqli_query($conn,$query);
 
                             while ($row = $result6->fetch_assoc()) {
                                 $id = $row['id']; 
                                  $company_name = $row['company_name']; 
-                                
+    
                             }
                             ?>
 
@@ -86,9 +87,13 @@ else{
                                     <ul class="navbar-nav ml-auto" id="nav" style="display: none;">
                                         <li><a href="home.php">Home</a></li>
                                      
+
                                         <li><a href="company-profile.php">Company dashboard</a></li>
                                         <li><a href="post_job.php">Post a Job</a></li>
                                        
+
+                                        
+                                        <li><a href="post_review.php">Post a review
                                         <li><a href="../account/logout.php" class="btn btn-warning p-3" >Logout</a></li>
                                     </ul>
                                     <!-- end menu area -->
@@ -204,6 +209,7 @@ else{
                                     </div>
 
                                 </div>
+
 <div class="col-md-6">
                                  <div class="form-group"> 
         <label class="control-label" for="date">Date</label>
@@ -245,6 +251,7 @@ else{
     <!-- custom scripts -->
     <script src="js/main.js"></script>
 
+
 <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.4.1/js/bootstrap-datepicker.min.js"></script>
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.4.1/css/bootstrap-datepicker3.css"/>
 
@@ -260,4 +267,5 @@ else{
         })
     })
 </script>
+
 </html>

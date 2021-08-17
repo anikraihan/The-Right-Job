@@ -84,9 +84,15 @@ else{
                                     <!-- start menu area -->
                                     <ul class="navbar-nav ml-auto" id="nav" style="display: none;">
                                         <li><a href="home.php">Home</a></li>
+
                                       <li><a href="profile.php">Dashboard</a></li>
                                         <li><a href="jobs_list.php">jobs list</a></li>
                                         
+
+
+                                      
+                                        <li><a href="jobs_list.php">jobs list</a></li>
+                                      
 
                                         <li><a href="post_review.php">Post a review</a></li>
                                        
