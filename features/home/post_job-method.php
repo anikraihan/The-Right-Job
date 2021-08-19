@@ -15,7 +15,7 @@ $email = $_SESSION["email"];
                           
 
 
-$error = "";
+$statusMsg = "";
 if (isset($_POST['submit'])) {
 	
 	$conn = new mysqli("localhost", "root", "", "the_right_job");
@@ -35,17 +35,19 @@ if (isset($_POST['submit'])) {
 
                     $conn->close();
                  
+
                     if ($insert) {
-                        $error = '<div class="alert alert-success">New job posted successfully!</div>';
+                        $status = 'success';
+                        $statusMsg = "review posted successfully.";
                     } else {
-                        $error = '<div class="alert alert-danger">Please try again. </div>';
+                        $statusMsg = "review post failed, please try again.";
                     }
                  
             
         // Display status message
-        echo $error;
+        echo $statusMsg;
 }
-header("Location: home.php?error=$error");
+header("Location: home.php");
 
 	
 

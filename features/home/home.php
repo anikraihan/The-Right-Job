@@ -88,20 +88,18 @@ $result3 = mysqli_query($conn,"SELECT * FROM job_post group by job_catagory orde
                                     <!-- start menu area -->
                                     <ul class="navbar-nav ml-auto" id="nav" style="display: none;">
                                         <li><a href="home.php">Home</a></li>
-                                     
+                                        <li><a href="admin.php">Admin</a></li>
+                                     <li><a href="../account/logout.php">Logout</a></li>
                                 
                                         
                                       
                                         <li><a href="jobs_list.php">jobs list</a></li>
                                         <li><a href="post_job.php">Post a Job</a></li>
-                                        <li><a href="post_review.php">Post a review</a></li>
-                                       
-                                          <li><a href="../account/logout.php" class="btn btn-warning p-3" >Logout</a></li>
-                                        
                                     </ul>
                                     <!-- end menu area -->
 
-                                    
+                                   
+                                
 
                                 </nav>
                             </div>
@@ -111,19 +109,6 @@ $result3 = mysqli_query($conn,"SELECT * FROM job_post group by job_catagory orde
             </div>
         </header>
         <!-- end header section -->
-
-
-               <span>
-            <?php
- 
-
-
-                  if(isset($_GET['error']))
-                   echo $_GET['error'];
-   
- 
-                 ?>
-              </span>
 
         <!-- start banner -->
         <section class="bg-img screen-height cover-background line-banner" data-overlay-dark="6" data-background="img/banner/bg2.jpg">

@@ -9,15 +9,12 @@ $email = $_SESSION["email"];
 $admin = $_SESSION["utype"];
 
 
-if ($admin=="company") {
+if ($admin=="admin") {
    
     
 }
 else{
-         $error = '<div class="alert alert-danger">Log into company profile to post a job</div>';
-    session_destroy();
-   
-    header("location: ../account/company/company_login.php?error=$error");
+        header("location: ../account/logout.php");
     }
 
 
@@ -83,11 +80,12 @@ else{
                                     <!-- start menu area -->
                                     <ul class="navbar-nav ml-auto" id="nav" style="display: none;">
                                         <li><a href="home.php">Home</a></li>
-                                     
+                                     <li><a href="../account/logout.php">Logout</a></li>
+                                
+                                        
+                                      
                                         <li><a href="jobs_list.php">jobs list</a></li>
-                                        <li><a href="post_job.php">Post a Job</a></li>
-                                        <li><a href="post_review.php">Post a review</a></li>
-                                        <li><a href="../account/logout.php" class="btn btn-warning p-3" >Logout</a></li>
+                                        <li><a href="post_job.php">Post a job</a></li>
                                     </ul>
                                     <!-- end menu area -->
 
@@ -122,7 +120,7 @@ else{
 
             <div class="col-xl-6 d-none d-lg-block text-right" >
         
-        <img class="wave3 wow shake" data-wow-duration="1s" data-wow-delay=".2s" src="img/job.svg">
+        <img class="wave3 wow shake" data-wow-duration="1s" data-wow-delay=".2s" src="img/bg.svg">
 
             </div>
 
@@ -135,7 +133,7 @@ else{
          <div class="review_details_area">
         <div class="container">
           <div class="review_form white-bg">
-  <img class="wave" src="img/type.svg">
+  <img class="wave" src="img/goals.svg">
           
                         <h4>Apply for the job</h4>
                         <form method="post" name="regform"  class="register-form" id="register-form"  action="post_job-method.php" >
