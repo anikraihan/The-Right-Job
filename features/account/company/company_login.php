@@ -62,7 +62,7 @@ if (isset($_SESSION['email'])) {
                  ?>
               </span>
 
-                <a href="#!" class="forgot-password-link">Forgot password?</a>
+                <a href="../forgot.php" class="forgot-password-link">Forgot password?</a>
                 <p class="login-card-footer-text">Don't have an account? <a href="signup.php" class="text-reset">Register here</a></p>
                 <p class="login-card-footer-text">Login to Job-seeker <a href="../jobseeker/jobseeker_login.php" class="text-reset">Profile</a></p>
                 <nav class="login-card-footer-nav">

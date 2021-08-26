@@ -63,7 +63,7 @@ $result8=mysqli_query($conn,"SELECT * FROM job_post where id = $jobid");
 <head>
 	<meta charset="UTF-8">
 	<meta name="viewport" content="width=device-width, initial-scale=1.0">
-	<title>Profile dashboard</title>
+	<title>Candidate profile</title>
       <!-- plugins -->
     <link rel="stylesheet" href="css/plugins.css" />
 
@@ -142,7 +142,7 @@ $result8=mysqli_query($conn,"SELECT * FROM job_post where id = $jobid");
             <div class="row">
                 <div class="col-xl-5">
                     <div class="bradcam_text">
-                        <h3>Profile dashboard</h3>
+                        <h3>Candidate profile </h3>
                         
       
                             
@@ -215,11 +215,7 @@ $result8=mysqli_query($conn,"SELECT * FROM job_post where id = $jobid");
                             </ul>
                         </div>
                     </div>
-                    <div class="col-md-2">
-                       
-                        <a href="update_profile2.php" class="profile-edit-btn">Edit profile</a>
-
-                    </div>
+                 
                 </div>
                 <div class="row">
                     <div class="col-md-4">

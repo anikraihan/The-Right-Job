@@ -76,6 +76,7 @@ $result2=mysqli_query($conn,"SELECT * FROM job_post_activity,job_post WHERE job_
 
     <!-- core style css -->
     <link href="css/styles.css" rel="stylesheet" />
+    <script src="https://kit.fontawesome.com/5bd5cf3f78.js" crossorigin="anonymous"></script>
 
 </head>
 
@@ -130,7 +131,7 @@ $result2=mysqli_query($conn,"SELECT * FROM job_post_activity,job_post WHERE job_
             <div class="row">
                 <div class="col-xl-5">
                     <div class="bradcam_text">
-                        <h3>Give a review</h3>
+                        <h3>My applications</h3>
                         
       
                             
@@ -142,7 +143,7 @@ $result2=mysqli_query($conn,"SELECT * FROM job_post_activity,job_post WHERE job_
 
             <div class="col-xl-6 d-none d-lg-block text-right" >
         
-        <img class="wave3 wow shake" data-wow-duration="1s" data-wow-delay=".2s" src="img/review.svg">
+        <img class="wave3 wow shake" data-wow-duration="1s" data-wow-delay=".2s" src="img/my-application.svg">
 
             </div>
 
@@ -205,10 +206,11 @@ $result2=mysqli_query($conn,"SELECT * FROM job_post_activity,job_post WHERE job_
                                         </div>
                                     </div>
                                     <div class='col-md-3 text-secondary xs-margin-10px-bottom'>
-                                        <span class='ti-location-pin margin-10px-right'></span>{$job_location}
-                                        <br> {$job_type}
+                                        <span class='ti-location-pin margin-10px-right'></span><i class='fas fa-location-arrow'></i> {$job_location}
+                                        <br> <i class='fas fa-clock'></i> {$job_type}
                                     </div>
                                     <div class='col-md-3 col-xl-2 text-primary text-left text-md-right'>
+                                    <i class='fas fa-exclamation-circle'></i>
                                         {$action_name}
                                     </div>
                                 </div>

@@ -26,7 +26,7 @@ if (isset($_POST['signin'])) {
 			
             $_SESSION["email"] = $email;
             header("location: ../loginsuccess.php?error=$error");
-            while ($row = $result->fetch_assoc()) {
+                while ($row = $result->fetch_assoc()) {
 
                 $_SESSION["utype"] = $row['admin'];
             }

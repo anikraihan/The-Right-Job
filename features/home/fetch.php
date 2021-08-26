@@ -28,7 +28,7 @@ else{
 					<table class="table table bordered">
 						<tr>
 							<th>Company Name</th>
-							<th>Model</th>
+							<th>job type</th>
 							<th>Salary</th>
 							<th>Description</th>
 							<th>Category</th>
@@ -46,7 +46,7 @@ else{
 				<td>'.$row["job_location"].'</td>
 					
 				
-			<td>	<a href="#" class="btn btn-success">Apply Now</a></td>
+			<td>	<a href="job-details.php?jobid='.$row["id"].'&cid='.$row["company_id"].'" class="btn btn-success">Apply Now</a></td>
 			</tr>
 		';
 	}

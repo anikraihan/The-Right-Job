@@ -150,7 +150,8 @@ else{
                                 <option>HR</option>
                                 <option>Marketing</option>
                                 <option>Finance</option>
-                                <option>Ecommerce</option>
+                                <option>Intern</option>
+                                <option>Sales executive</option>
                                 <option>Engineer</option>
                                 <option>Other</option>
                             </select>

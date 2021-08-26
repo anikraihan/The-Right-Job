@@ -191,7 +191,7 @@ $result7=mysqli_query($conn,"SELECT * FROM seeker_profile where user_id = $id");
                                  <div class="col-md-3">
                                     <div class="input_field">
                                     	<label for="validationCustom01" > SSC GPA</label>
-                                        <input value='<?php echo $row["ssc_gpa"];?>' class="form-control"   type="number" name="ssc_gpa" placeholder="SSC GPA">
+                                        <input value='<?php echo $row["ssc_gpa"];?>' class="form-control"   type="float" name="ssc_gpa" placeholder="SSC GPA">
                                     </div>
                                 </div>
                                  <div class="col-md-9">
@@ -204,7 +204,7 @@ $result7=mysqli_query($conn,"SELECT * FROM seeker_profile where user_id = $id");
  								<div class="col-md-3">
                                     <div class="input_field">
                                     	<label for="validationCustom01" > HSC GPA</label>
-                                        <input value='<?php echo $row["hsc_gpa"];?>' class="form-control"  type="number" name="hsc_gpa" placeholder="HSC GPA">
+                                        <input value='<?php echo $row["hsc_gpa"];?>' class="form-control"  type="float" name="hsc_gpa" placeholder="HSC GPA">
                                     </div>
                                 </div>
                               

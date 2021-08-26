@@ -5,9 +5,19 @@ if(!isset($_SESSION))
     session_start(); 
 } 
 //after successful login will be redirect to following page
-if (isset($_SESSION['email'])) {
+// if (isset($_SESSION['email'])) {
   
-  header("location: ../loginsuccess.php");
+//   header("location: ../loginsuccess.php");
+// }
+
+if (isset($_SESSION['email'])) {
+    if($_SESSION['utype']=="admin"){
+    header("location: ../admin-redirect.php");
+  }
+  else{
+   header("location: ../loginsuccess.php");
+}
+
 }
 
 
@@ -62,7 +72,7 @@ if (isset($_SESSION['email'])) {
                  ?>
               </span>
 
-                <a href="#!" class="forgot-password-link">Forgot password?</a>
+                <a href="../forgot.php" class="forgot-password-link">Forgot password?</a>
                 <p class="login-card-footer-text">Don't have an account? <a href="jobseeker_reg.php" class="text-reset">Register here</a></p>
                 <p class="login-card-footer-text">Login to Company <a href="../company/company_login.php" class="text-reset">Profile</a></p>
                 <nav class="login-card-footer-nav">

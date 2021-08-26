@@ -14,6 +14,8 @@ else{
 ?>
 
 
+
+
 <?php
 
 $conn = new mysqli("localhost", "root", "", "the_right_job");
@@ -21,11 +23,10 @@ $conn = new mysqli("localhost", "root", "", "the_right_job");
 
 
 
-$result=mysqli_query($conn,"SELECT * FROM job_post");
-$result2=mysqli_query($conn,"SELECT * FROM company,job_post WHERE job_post.company_id=company.id");
+$result=mysqli_query($conn,"SELECT * FROM company,job_post WHERE job_post.company_id=company.id");
+//$result2=mysqli_query($conn,"SELECT * FROM company,job_post WHERE job_post.company_id=company.id");
 $result3 = mysqli_query($conn,"SELECT * FROM job_post group by job_catagory order by COUNT(job_catagory) desc");
 $result12=mysqli_query($conn,"SELECT * FROM post_reviews");
-
 
 ?>
 
@@ -45,6 +46,7 @@ $result12=mysqli_query($conn,"SELECT * FROM post_reviews");
 
     <!-- title  -->
     <title>The Right Job</title>
+    <link rel="shortcut icon" href="img/logos/logo.png">
 
  
 
@@ -58,6 +60,13 @@ $result12=mysqli_query($conn,"SELECT * FROM post_reviews");
     <link href="css/styles.css" rel="stylesheet" />
     <script src="https://kit.fontawesome.com/5bd5cf3f78.js" crossorigin="anonymous"></script>
      <link href="style.css" rel="stylesheet" />
+
+     <link
+  href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.1/css/all.min.css"
+  rel="stylesheet"
+/>
+<!-- Google Fonts -->
+
 
 
 </head>
@@ -84,11 +93,14 @@ $result12=mysqli_query($conn,"SELECT * FROM post_reviews");
                                         <!-- start logo -->
                                         <a href="home.php" class="navbar-brand width-200px sm-width-180px xs-width-150px"><img id="logo" src="img/logos/logo.png" alt="logo"></a>
                                         <!-- end logo -->
+        
                                     </div>
 
                                    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
     <span class="navbar-toggler-icon"></span>
   </button>
+
+
 
                                     <!-- start menu area -->
                                     <ul class="navbar-nav ml-auto" id="nav" style="display: none;">
@@ -105,14 +117,22 @@ $result12=mysqli_query($conn,"SELECT * FROM post_reviews");
                                         <li><a href="company-profile.php">Company dashboard</a></li>
                                         
                                        
-                                          <li><a href="../account/logout.php" class="btn btn-warning p-3" >Logout</a></li>
+                                          <li><a href="../account/logout.php" class="btn btn-warning p-3" >Logout</a></li> 
+                                                                                            
+
+       
                                         
                                     </ul>
                                     <!-- end menu area -->
 
-                                    
+   
+    
+    
+               
 
-                                </nav>
+   
+
+
                             </div>
                         </div>
                     </div>
@@ -257,7 +277,7 @@ $result12=mysqli_query($conn,"SELECT * FROM post_reviews");
                     <div class="col-md-12"> 
                       <?php
                     $i=0;
-                    while($row = mysqli_fetch_array($result) AND $row2 = mysqli_fetch_array($result2)) {
+                    while($row = mysqli_fetch_array($result)) {
                          $jpost = $row['id'];
                            $company_id = $row['company_id'];
                            $job_description = $row['job_description'];
@@ -267,7 +287,9 @@ $result12=mysqli_query($conn,"SELECT * FROM post_reviews");
                                  $vacancy = $row['vacancy'];
                                  $expectation = $row['expectation'];
                                  $job_location = $row['job_location'];
-                                 $company_name = $row2['company_name'];
+                                 $company_name = $row['company_name'];
+                                  $deadline = $row['deadline'];
+
                                 
                             echo "<div class='card'>
                                  
@@ -284,10 +306,11 @@ $result12=mysqli_query($conn,"SELECT * FROM post_reviews");
                                             <div>
 
 
-                                                <span class='text-secondary'>{$position}</span>
-                                            <br> {$company_name}
+                                                <span class='text-secondary'>Position: {$position}</span>
+                                            <br>Company name: {$company_name}
 
-                                               <br> ৳{$salary}
+                                               <br>Salary: ৳{$salary}
+                                             
 
                                             </div>
 
@@ -299,8 +322,9 @@ $result12=mysqli_query($conn,"SELECT * FROM post_reviews");
 
 
                               <div class=' col-md-3 text-secondary xs-margin-10px-bottom'>
-                                        <span class='ti-location-pin margin-10px-right'></span>{$job_location}
-                                        <br> {$job_type}
+                                        <span class='ti-location-pin margin-10px-right'></span><i class='fas fa-location-arrow'></i> {$job_location}
+                                        <br><i class='fas fa-clock'></i> {$job_type}
+                                           <br>Deadline: {$deadline}
                                         
                                     </div>
                                     
@@ -461,7 +485,6 @@ $result12=mysqli_query($conn,"SELECT * FROM post_reviews");
     });
   });
   </script>
-
 
 
 

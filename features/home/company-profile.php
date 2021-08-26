@@ -162,7 +162,7 @@ $result7=mysqli_query($conn,"SELECT * FROM company where id = $id");
 
             <div class="col-xl-6 d-none d-lg-block text-right" >
         
-        <img class="wave3 wow shake" data-wow-duration="1s" data-wow-delay=".2s" src="img/review.svg">
+        <img class="wave3 wow shake" data-wow-duration="1s" data-wow-delay=".2s" src="img/company-cv.svg">
 
             </div>
 
@@ -222,10 +222,10 @@ $result7=mysqli_query($conn,"SELECT * FROM company where id = $id");
                                             <div>
 
 
-                                                <span class='text-secondary'>{$position}</span>
-                                            <br> {$cname}
+                                                <span class='text-secondary'>position :{$position}</span>
+                                            <br>Company name: {$cname}
 
-                                               <br> ৳{$salary}
+                                               <br>Salary: ৳{$salary}
 
                                             </div>
 
@@ -234,11 +234,11 @@ $result7=mysqli_query($conn,"SELECT * FROM company where id = $id");
                                         </div>
                                     </div>
                                     <div class='col-md-3 text-secondary xs-margin-10px-bottom'>
-                                        <span class='ti-location-pin margin-10px-right'></span>{$job_location}
-                                        <br> {$user_id}
+                                        <span class='ti-location-pin margin-10px-right'></span>Job location: {$job_location}
+                                        <br>Application id: {$user_id}
                                     </div>
                                     <div class='col-md-3 col-xl-2 text-primary text-left text-md-right'>
-                                        View details →
+                                        View candidate details →
                                     </div>
                                 </div>
                             </div>

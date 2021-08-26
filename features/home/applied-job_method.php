@@ -40,6 +40,7 @@ $error = "";
 
  
      $duplicate=mysqli_query($conn,"select * from job_post_activity where user_id='$id' AND job_post_id = '$jobid'");
+   
     
      $conn = new mysqli("localhost", "root", "", "the_right_job");
      $query= "select deadline from job_post where id = $jobid" ;
@@ -48,8 +49,10 @@ $error = "";
                               $deadline = $row2['deadline'];
                                 
                             }
-                         
 
+    
+            
+ $user_id=mysqli_query($conn,"select * from seeker_profile where user_id = '$id'");
 
 $today = date("Y-m-d H:i:s");
 
@@ -69,7 +72,12 @@ elseif($deadline < $today){
     
     header("Location: home.php?error=$error");
 }
-
+elseif(mysqli_num_rows($user_id)==0)
+{
+$error = '<div class="alert alert-danger">Please create your profile first!.</div>';
+    
+    header("Location: update_profile.php?error=$error");
+}
 
 
 else{
