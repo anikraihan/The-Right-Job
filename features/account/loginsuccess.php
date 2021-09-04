@@ -1,5 +1,25 @@
 <?php 
+session_start();
 
-header("location: ../home/home.php");
+
+
+$email = $_SESSION["email"];
+
+
+$admin = $_SESSION["utype"];
+
+
+if ($admin=="admin") {
+   
+      header("location: ../home/admin.php");
+}
+else{
+        
+   
+   header("location: ../home/home.php");
+    }
+
+
+   
 
 ?>
