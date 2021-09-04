@@ -85,4 +85,12 @@ body {
 }
   
 
-
+.captcha {
+    background: #054f8a;
+    color: whitesmoke;
+    text-decoration: line-through;
+    font-size: 25px;
+    margin-bottom: 20px;
+    font-style: italic;
+    letter-spacing: 12px;
+}

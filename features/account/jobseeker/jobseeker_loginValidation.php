@@ -5,8 +5,12 @@ session_start();
 $error = "";
 // store session data
 if (isset($_POST['signin'])) {
-	
-    if (empty($_POST['email']) || empty($_POST['password'])) {
+
+
+if($_SESSION['captcha']!=$_POST['captcha']){
+      $error = '<div class="alert alert-danger">Captcha error!</div>';
+     header("location: jobseeker_login.php?error=$error");
+}elseif (empty($_POST['email']) || empty($_POST['password'])) {
         $error = '<div class="alert alert-danger">Email or password is invalid!.</div>';
         header("location: jobseeker_login.php?error=$error");
     } else {
@@ -42,3 +46,5 @@ if (isset($_POST['signin'])) {
         $conn->close();
     }
 }
+
+?>

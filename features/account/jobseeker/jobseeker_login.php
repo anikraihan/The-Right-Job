@@ -58,7 +58,48 @@ if (isset($_SESSION['email'])) {
                     <label for="password" class="sr-only">Password</label>
                     <input type="password" name="password" id="password" class="form-control" placeholder="***********">
                   </div>
+                  
+                                   
+                                          <span class="captcha">
+                                              
+
+    <?php
+ 
+$permitted_chars = '0123456789abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ!@#%';
+ 
+function generate_string($input, $strength = 16) {
+    $input_length = strlen($input);
+    $random_string = '';
+    for($i = 0; $i < $strength; $i++) {
+        $random_character = $input[mt_rand(0, $input_length - 1)];
+        $random_string .= $random_character;
+    }
+ 
+    return $random_string;
+}   
+
+$captcha= generate_string($permitted_chars, 5);
+echo $captcha;   
+
+ 
+   session_regenerate_id();
+   $_SESSION['captcha']=$captcha;
+  
+?>         
+
+
+              </span>
+         
+
+
+              <div class="form-group mb-4">
+                    <label for="captcha" class="sr-only">Captcha</label>
+                    <input type="text" name="captcha" id="captcha" class="form-control" placeholder="***********">
+                  </div>   
+                                      
+
                   <input name="signin" id="signin" class="btn btn-block login-btn mb-4" type="submit" value="Log in"/>
+
                 </form>
              <span>
             <?php
