@@ -15,6 +15,19 @@ else{
 ?>
 
 
+<?php
+
+$conn = new mysqli("localhost", "root", "", "the_right_job");
+
+
+
+
+$result=mysqli_query($conn,"SELECT * FROM company,job_post WHERE job_post.company_id=company.id");
+//$result2=mysqli_query($conn,"SELECT * FROM company,job_post WHERE job_post.company_id=company.id");
+$result3 = mysqli_query($conn,"SELECT * FROM job_post group by job_catagory order by COUNT(job_catagory) desc");
+$result12=mysqli_query($conn,"SELECT * FROM post_reviews");
+
+?>
 
 
 
