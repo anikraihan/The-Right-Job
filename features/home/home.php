@@ -30,6 +30,7 @@ $result12=mysqli_query($conn,"SELECT * FROM post_reviews");
 
 ?>
 
+
               
 
 
@@ -66,6 +67,33 @@ $result12=mysqli_query($conn,"SELECT * FROM post_reviews");
   rel="stylesheet"
 />
 <!-- Google Fonts -->
+
+<script>
+"use strict";
+
+!function() {
+  var t = window.driftt = window.drift = window.driftt || [];
+  if (!t.init) {
+    if (t.invoked) return void (window.console && console.error && console.error("Drift snippet included twice."));
+    t.invoked = !0, t.methods = [ "identify", "config", "track", "reset", "debug", "show", "ping", "page", "hide", "off", "on" ], 
+    t.factory = function(e) {
+      return function() {
+        var n = Array.prototype.slice.call(arguments);
+        return n.unshift(e), t.push(n), t;
+      };
+    }, t.methods.forEach(function(e) {
+      t[e] = t.factory(e);
+    }), t.load = function(t) {
+      var e = 3e5, n = Math.ceil(new Date() / e) * e, o = document.createElement("script");
+      o.type = "text/javascript", o.async = !0, o.crossorigin = "anonymous", o.src = "https://js.driftt.com/include/" + n + "/" + t + ".js";
+      var i = document.getElementsByTagName("script")[0];
+      i.parentNode.insertBefore(o, i);
+    };
+  }
+}();
+drift.SNIPPET_VERSION = '0.3.1';
+drift.load('9rf6ri8mzizg');
+</script>
 
 
 
@@ -164,10 +192,37 @@ $result12=mysqli_query($conn,"SELECT * FROM post_reviews");
                         <div class="display-table-cell vertical-align-middle text-center">
 
                              <p class="font-size18 xs-font-size16 text-white letter-spacing-1 margin-15px-bottom">logged in as <?php echo $email;?></p>
+                            <?php
 
-                           
+                             if ($admin=="jobseeker") {
+   
+    
+
 
                             
+                           $conn = new mysqli("localhost", "root", "", "the_right_job");
+                            $query = "select id from user_account where email ='".$_SESSION['email']."'";
+                            $result6 = mysqli_query($conn,$query);
+                            while ($row = $result6->fetch_assoc()) {
+                                $id = $row['id']; 
+                                
+                            }
+                           
+                         
+                            $query2 = "select picFile from seeker_profile where user_id =$id";
+                            $result7 = mysqli_query($conn,$query2);
+                            while ($row2 = $result7->fetch_assoc()) {
+                                $picFile = $row2['picFile']; 
+                                
+                            
+                        
+
+                           echo '<img class="img-responsive img-circle img-thumbnail" src="data:image/png;base64,'.base64_encode($row2['picFile']).'" width="85" height="85"   />';
+
+                       }
+
+                   }
+                           ?>
                                        
                             
                             <h1 class="cd-headline slide">
@@ -388,50 +443,6 @@ $result12=mysqli_query($conn,"SELECT * FROM post_reviews");
     </div>
 </div>
 
-        <!-- start counter section -->
-        <section class="bg-light2">
-            <div class="container">
-                <div class="row">
-                    <div class="col-md-3 col-6 xs-margin-30px-bottom">
-                        <div class="text-center">
-                            <div class="margin-20px-bottom">
-                                <span class="ti-package font-size24 text-theme-color"></span>
-                            </div>
-                            <h5 class="countup font-size30 no-margin-bottom">12376</h5>
-                            <p class="no-margin-bottom text-extra-dark-gray font-weight-600">Live Jobs</p>
-                        </div>
-                    </div>
-                    <div class="col-md-3 col-6 xs-margin-30px-bottom">
-                        <div class="text-center">
-                            <div class="margin-20px-bottom">
-                                <span class="ti-user font-size24 text-theme-color"></span>
-                            </div>
-                            <h5 class="countup font-size30 no-margin-bottom">89562</h5>
-                            <p class="no-margin-bottom text-extra-dark-gray font-weight-600">Candidate</p>
-                        </div>
-                    </div>
-                    <div class="col-md-3 col-6">
-                        <div class="text-center">
-                            <div class="margin-20px-bottom">
-                                <span class="ti-files font-size24 text-theme-color"></span>
-                            </div>
-                            <h5 class="countup font-size30 no-margin-bottom">28166</h5>
-                            <p class="no-margin-bottom text-extra-dark-gray font-weight-600">Resume</p>
-                        </div>
-                    </div>
-                    <div class="col-md-3 col-6">
-                        <div class="text-center">
-                            <div class="margin-20px-bottom">
-                                <span class="ti-medall-alt font-size24 text-theme-color"></span>
-                            </div>
-                            <h5 class="countup font-size30 no-margin-bottom">1366</h5>
-                            <p class="no-margin-bottom text-extra-dark-gray font-weight-600">Companies</p>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </section>
-        <!-- end counter section -->
 
 
        
@@ -439,6 +450,8 @@ $result12=mysqli_query($conn,"SELECT * FROM post_reviews");
      
 
     </div>
+
+
   
 
     <!-- all js include start -->

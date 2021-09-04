@@ -3,10 +3,14 @@ session_start();
 
 
 
+$admin="";
 $email = $_SESSION["email"];
 
+if(isset($_SESSION['utype']))
+{
+   $admin = $_SESSION["utype"]; 
 
-$admin = $_SESSION["utype"];
+
 
 
 if ($admin=="company") {
@@ -20,7 +24,10 @@ else{
 
         
     }
-
+}else{
+     $error = '<div class="alert alert-danger">Please register to use tha feature</div>';
+      header("location: ../account/home.php?error=$error");
+}
 
    
 

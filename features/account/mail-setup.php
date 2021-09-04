@@ -14,8 +14,8 @@ $mail->SMTPAuth   = TRUE;
 $mail->SMTPSecure = "tls";
 $mail->Port       = 587;
 $mail->Host       = "smtp.gmail.com";
-$mail->Username   = "raihan.apurba@northsouth.edu";
-$mail->Password   = "?anik567336445@raihaN?";
+$mail->Username   = "the.rightob@gmail.com";
+$mail->Password   = "Admin@123";
 
 
 
@@ -44,10 +44,10 @@ if (($result->num_rows == 1) or($result2->num_rows == 1)) {
 
 $mail->IsHTML(true);
 $mail->AddAddress($ee);
-$mail->SetFrom("raihan.apurba@northsouth.edu", "The-right job");
-$mail->AddReplyTo("raihan.apurba@northsouth.edu", "The-right-job");
+$mail->SetFrom("the.rightob@gmail.com", "The-right job");
+$mail->AddReplyTo("the.rightob@gmail.com", "The-right-job");
 $mail->AddCC($ee);
-$mail->Subject = "Test is Test Email sent via Gmail SMTP Server using PHP Mailer";
+$mail->Subject = "Test is a password reset mail from The-right-job. Ignore this if you haven't applied for password reset.";
 $content = "<b>Enter the given OTP $otp.</b>";
   // send email and store data in session
 

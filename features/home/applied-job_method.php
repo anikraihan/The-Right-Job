@@ -1,8 +1,10 @@
 <?php
 session_start();
 
-$admin = $_SESSION["utype"];
 
+ if(isset($_SESSION['utype']))
+{
+    $admin = $_SESSION["utype"];
 
 if ($admin=="company") {
    
@@ -108,6 +110,12 @@ else{
 header("Location: home.php?error=$error");
 
 	
+}
+
+}else
+{
+      $error = '<div class="alert alert-danger">You cant apply for jobs by using social login </div>';
+      header("Location: ../account/home.php?error=$error");
 }
 
     ?>

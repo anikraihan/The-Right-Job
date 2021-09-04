@@ -180,6 +180,7 @@ $result8=mysqli_query($conn,"SELECT * FROM job_post where id = $jobid");
           $first_name = $row['first_name'];
           $last_name = $row['last_name'];
               $age = $row['age'];
+               $user_mail = $row['email'];
                $curent_job = $row['curent_job'];
                $school = $row['school'];
                 $collage = $row['collage'];
@@ -309,14 +310,19 @@ $result8=mysqli_query($conn,"SELECT * FROM job_post where id = $jobid");
 
               </div>
                 </div>
-                <form method="post" name="regform"  class="register-form" id="register-form"  action="job-status-method.php" >
+                <form method="post" name="regform"  class="register-form" id="register-form"  action="../account/jobstatus-mail.php" >
                      <input class="form-control" type="hidden" name="id" value="<?php echo $app_id;?>">
+                     <input class="form-control" type="hidden" name="user_mail" value="<?php echo $user_mail;?>">
         <select class="form-select" name="action_name" aria-label="Default select example">
   <option selected>Click to change job application status.</option>
   <option value="selected">Selected.</option>
   <option value="pending">Pending.</option>
   <option value="rejected">Rejected.</option>
+
+    
+  
 </select>
+
 <div class="col-md-12 m-2">
                                       <input type="submit" name="submit" id="signup" class="btn btn-primary btn-lg btn-block" value="Submit action"/>
                                 </div>
