@@ -49,7 +49,13 @@ $conn = new mysqli("localhost", "root", "", "the_right_job");
 
 $result7=mysqli_query($conn,"SELECT * FROM seeker_profile where user_id = $id");
 
+$query = "SELECT COUNT( *) as Num
+   FROM seeker_profile";
+$result17 = mysqli_query($conn,$query);
+while ($row = $result17->fetch_assoc()) {
+$seeker = $row["Num"];
 
+}
 
 ?>
 
@@ -129,7 +135,7 @@ $result7=mysqli_query($conn,"SELECT * FROM seeker_profile where user_id = $id");
                         <?php echo $id;?>
       
                             
-                            <h3 style="color: #485460" class="wow fadeInLeft" data-wow-duration="1s" data-wow-delay=".2s"> 100+ jobseeker listed</h3>
+                            <h3 style="color: #485460" class="wow fadeInLeft" data-wow-duration="1s" data-wow-delay=".2s"> <?php echo $seeker ;?> jobseeker listed</h3>
                              
                     
                     </div>

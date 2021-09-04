@@ -297,7 +297,7 @@ drift.load('9rf6ri8mzizg');
 
                                     </div>
                                     <div>
-                                        <h5 class="no-margin-bottom font-size20"><a href="jobs_list.php" class="text-extra-dark-gray"><?php echo $row["job_catagory"]; $jc = $row["job_catagory"]; ?></a></h5>
+                                        <h5 class="no-margin-bottom font-size20"><a href="#" class="text-extra-dark-gray"><?php echo $row["job_catagory"]; $jc = $row["job_catagory"]; ?></a></h5>
                                        
                                          <?php
                            $conn = new mysqli("localhost", "root", "", "the_right_job");

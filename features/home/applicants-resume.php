@@ -1,10 +1,30 @@
 <?php 
 session_start();
+
+$user_id = $_GET['user_id'];
 $jobid = $_GET['jobid'];
-$cid = $_GET['cid'];
+$app_id = $_GET['app_id'];
+
+
+$email = $_SESSION["email"];
+
+
+$admin = $_SESSION["utype"];
 
 
 
+
+if ($admin=="company") {
+   
+
+}
+else{
+
+         $error = '<div class="alert alert-danger">Profile dashboard is only for jobseeker</div>';
+    session_destroy();
+   
+    header("location: ../account/jobseeker/jobseeker_login.php?error=$error");
+    }
 
 
    
@@ -12,7 +32,7 @@ $cid = $_GET['cid'];
 ?>
 <?php
                            $conn = new mysqli("localhost", "root", "", "the_right_job");
-                             $query = "select id from user_account where email ='".$_SESSION['email']."'";
+                            $query = "select id from user_account where email ='".$_SESSION['email']."'";
                             $result6 = mysqli_query($conn,$query);
                             while ($row = $result6->fetch_assoc()) {
                                 $id = $row['id']; 
@@ -23,31 +43,25 @@ $cid = $_GET['cid'];
 
 
 
-
 <?php
 
 $conn = new mysqli("localhost", "root", "", "the_right_job");
 
 
- 
 
 
+$result7=mysqli_query($conn,"SELECT * FROM seeker_profile where user_id = $user_id");
 $result8=mysqli_query($conn,"SELECT * FROM job_post where id = $jobid");
-$result9=mysqli_query($conn,"SELECT * FROM company where id = $cid");
+$query = "SELECT COUNT( *) as Num
+   FROM seeker_profile";
+$result17 = mysqli_query($conn,$query);
+while ($row = $result17->fetch_assoc()) {
+$seeker = $row["Num"];
 
+}
 
 
 ?>
-
-      <?php
-$conn = new mysqli("localhost", "root", "", "the_right_job");
-$query = "SELECT COUNT( *) as Number
-   FROM job_post";
-$result16 = mysqli_query($conn,$query);
-while ($row = $result16->fetch_assoc()) {
-$rxx = $row["Number"];
-
-} ?>
 
 
 <!DOCTYPE html>
@@ -55,7 +69,7 @@ $rxx = $row["Number"];
 <head>
 	<meta charset="UTF-8">
 	<meta name="viewport" content="width=device-width, initial-scale=1.0">
-	<title>Job details</title>
+	<title>Candidate profile</title>
       <!-- plugins -->
     <link rel="stylesheet" href="css/plugins.css" />
 
@@ -91,12 +105,7 @@ $rxx = $row["Number"];
 
                                     <!-- start menu area -->
                                     <ul class="navbar-nav ml-auto" id="nav" style="display: none;">
-
-                                           <?php
-
-                                        if(isset($_SESSION['utype']))
-                                        {
-                                       echo '<li><a href="home.php">Home</a></li>
+                                        <li><a href="home.php">Home</a></li>
                                      
                                 
                                         <li><a href="profile.php">Profile</a></li>
@@ -104,15 +113,9 @@ $rxx = $row["Number"];
                                         <li><a href="jobs_list.php">jobs list</a></li>
                                         <li><a href="post_job.php">Post a Job</a></li>
                                         <li><a href="post_review.php">Post a review</a></li>
-                                         <li><a href="../account/logout.php" class="btn btn-warning p-3" >Logout</a></li>';
-                                        }
-                                       else
-                                       {    echo '<li><a href="../account/home.php">Home</a></li>
-                                                <li><a href="post_job.php">Post a Job</a></li>
-
-                                          <li><a href="../account/logout.php" class="btn btn-warning p-3" >Logout</a></li>';
-                                       }
-                                        ?>
+                                       
+                                          <li><a href="../account/logout.php" class="btn btn-warning p-3" >Logout</a></li>
+                                        
                                     </ul>
                                     <!-- end menu area -->
 
@@ -145,11 +148,11 @@ $rxx = $row["Number"];
             <div class="row">
                 <div class="col-xl-5">
                     <div class="bradcam_text">
-                        <h3>Job details</h3>
+                        <h3>Candidate profile </h3>
                         
       
                             
-                            <h3 style="color: #485460" class="wow fadeInLeft" data-wow-duration="1s" data-wow-delay=".2s"> <?php echo $rxx;?> jobs listed</h3>
+                            <h3 style="color: #485460" class="wow fadeInLeft" data-wow-duration="1s" data-wow-delay=".2s"> <?php echo $seeker ;?> profile listed</h3>
                              
                     
                     </div>
@@ -176,49 +179,60 @@ $rxx = $row["Number"];
             <form method="post">
                 <div class="row">
 
-      <?php
-                    $i=0;
-                    while($row = mysqli_fetch_array($result8) AND $row2 = mysqli_fetch_array($result9)) {
-                         $jpost = $row['id'];
-                           $company_id = $row['company_id'];
-                           $job_description = $row['job_description'];
-                                $job_type = $row['job_type'];
-                                $salary = $row['salary'];
-                                 $position = $row['position'];
-                                 $vacancy = $row['vacancy'];
-                                 $expectation = $row['expectation'];
-                                 $job_location = $row['job_location'];
-                                 $company_name = $row2['company_name'];
-                               
-                                 $email = $row2['email'];
-                                
-
+                         <?php
+      $i=0;
+      while($row = mysqli_fetch_array($result7) AND $row2 = mysqli_fetch_array($result8)) {
+        $user_id = $row['user_id'];
+          $first_name = $row['first_name'];
+          $last_name = $row['last_name'];
+              $age = $row['age'];
+               $user_mail = $row['email'];
+               $curent_job = $row['curent_job'];
+               $school = $row['school'];
+                $collage = $row['collage'];
+                $uni_name = $row['uni_name'];
+                $ssc_gpa = $row['ssc_gpa'];
+                        $hsc_gpa = $row['hsc_gpa'];
+                                $uni_cgpa = $row['uni_cgpa'];
+                                $position = $row2['position'];
+                                $cname = $row2['cname'];
+                                $job_type = $row2['job_type'];
                               
 
-               echo     '
+               echo     '<div class="col-md-4">
+                        <div class="profile-img">
+                            <img class="img d-flex justify-content-end" src="data:image/png;base64,'.base64_encode($row['picFile']).'" alt="Profile image">
+                            
+                        </div>
                     </div>
                     <div class="col-md-6 mb-n5">
                         <div class="profile-head">
                                     <h5>
-                                        '.$row['position'].'
+                                        '.$row['first_name'].'
                                     </h5>
                                   
                                   
-                                   
-                          
+                                    <p class="proile-rating">Company name: <span>'.$row2['cname'].'</span></p>
+                                     <p class="proile-rating">Position: <span>'.$row2['position'].'</span></p>
+                            <ul class="nav nav-tabs" id="myTab" role="tablist">
+                                <li class="nav-item">
+                                    <a class="nav-link active" id="home-tab" data-toggle="tab" href="#home" role="tab" aria-controls="home" aria-selected="true">About</a>
+                                </li>
+                               
+                            </ul>
                         </div>
                     </div>
-                  
+                 
                 </div>
                 <div class="row">
                     <div class="col-md-4">
                         <div class="profile-work">
-                            <p>Job location</p>
-                          '.$row['job_location'].'
-                            <p>salary</p>
-                          '.$row['salary'].'
-                          <p>Job type</p>
-                          '.$row['job_type'].'
+                            <p>Schooll name</p>
+                          '.$row['school'].'
+                            <p>Collage name</p>
+                          '.$row['collage'].'
+                          <p>University name</p>
+                          '.$row['uni_name'].'
                         </div>
                     </div>
                     <div class="col-md-8 mt-n5">
@@ -226,10 +240,10 @@ $rxx = $row["Number"];
                            
                                         <div class="row">
                                             <div class="col-md-6">
-                                                <label>Company Id</label>
+                                                <label>User Id</label>
                                             </div>
                                             <div class="col-md-6">
-                                                <p>'.$row['company_id'].'</p>
+                                                <p>'.$row['user_id'].'</p>
                                             </div>
                                         </div>
                                         <div class="row">
@@ -237,7 +251,7 @@ $rxx = $row["Number"];
                                                 <label>Name</label>
                                             </div>
                                             <div class="col-md-6">
-                                                <p>'.$row2['company_name'].' </p>
+                                                <p>'.$row['first_name'].' '.$row['last_name'].'</p>
                                             </div>
                                         </div>
                                         <div class="row">
@@ -245,54 +259,53 @@ $rxx = $row["Number"];
                                                 <label>Email</label>
                                             </div>
                                             <div class="col-md-6">
-                                                <p>'.$row2['email'].'</p>
+                                                <p>'.$row['email'].'</p>
                                             </div>
                                         </div>
                                         <div class="row">
                                             <div class="col-md-6">
-                                                <label>Salary</label>
+                                                <label>SSC GPA</label>
                                             </div>
                                             <div class="col-md-6">
-                                                <p>'.$row['salary'].'</p>
-                                            </div>
-                                        </div>
-                                      
-                                         <div class="row">
-                                            <div class="col-md-6">
-                                                <label>vacancy</label>
-                                            </div>
-                                            <div class="col-md-6">
-                                                <p>'.$row['vacancy'].'</p>
+                                                <p>'.$row['ssc_gpa'].'</p>
                                             </div>
                                         </div>
-                                         <div class="row">
+                                        <div class="row">
                                             <div class="col-md-6">
-                                                <label>Job description</label>
+                                                <label>HSC GPA</label>
                                             </div>
                                             <div class="col-md-6">
-                                                <p>'.$row['job_description'].'</p>
+                                                <p>'.$row['hsc_gpa'].'</p>
                                             </div>
                                         </div>
                                          <div class="row">
                                             <div class="col-md-6">
-                                                <label>Job expectation</label>
+                                                <label>Undergrad Cgpa</label>
                                             </div>
                                             <div class="col-md-6">
-                                                <p>'.$row['expectation'].'</p>
+                                                <p>'.$row['uni_cgpa'].'</p>
+                                            </div>
+                                        </div>
+                                         <div class="row">
+                                            <div class="col-md-6">
+                                                <label>Current Job</label>
+                                            </div>
+                                            <div class="col-md-6">
+                                                <p>'.$row['curent_job'].'</p>
+                                            </div>
+                                        </div>
+                                         <div class="row">
+                                            <div class="col-md-6">
+                                                <label>Previous Job</label>
+                                            </div>
+                                            <div class="col-md-6">
+                                                <p>'.$row['previous'].'</p>
                                             </div>
                                         </div>
                             </div>
-                         
-
                        
                    
-                </div>';
-                  echo "<div class='col-md-8'>
-
-                                 <a class='btn btn-primary btn-block'  href='applied-job_method.php?jobpost=$jpost&com=$company_id'>Apply for the job</a>
-                                 </div>"
-                            
-
+                </div>'
                       ;
           }
 
@@ -301,13 +314,29 @@ $rxx = $row["Number"];
             </form>           
         </div>
 
-
-
-
               </div>
                 </div>
+                <form method="post" name="regform"  class="register-form" id="register-form"  action="../account/jobstatus-mail.php" >
+                     <input class="form-control" type="hidden" name="id" value="<?php echo $app_id;?>">
+                     <input class="form-control" type="hidden" name="user_mail" value="<?php echo $user_mail;?>">
+        <select class="form-select" name="action_name" aria-label="Default select example">
+  <option selected>Click to change job application status.</option>
+  <option value="selected">Selected.</option>
+  <option value="pending">Pending.</option>
+  <option value="rejected">Rejected.</option>
+
+    
+  
+</select>
+
+<div class="col-md-12 m-2">
+                                      <input type="submit" name="submit" id="signup" class="btn btn-primary btn-lg btn-block" value="Submit action"/>
+                                </div>
+</form>
             </div>
         </section>
+
+
 </body>
 
  <script src="js/core.min.js"></script>
