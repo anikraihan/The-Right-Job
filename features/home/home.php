@@ -4,6 +4,7 @@ session_start();
 
 if(isset($_SESSION['email'])) {
 $email = $_SESSION["email"];
+$admin = $_SESSION["utype"];
 
 }
 else{
@@ -13,6 +14,8 @@ else{
 ?>
 
 
+
+
 <?php
 
 $conn = new mysqli("localhost", "root", "", "the_right_job");
@@ -20,12 +23,13 @@ $conn = new mysqli("localhost", "root", "", "the_right_job");
 
 
 
-$result=mysqli_query($conn,"SELECT * FROM job_post");
-$result2=mysqli_query($conn,"SELECT * FROM company,job_post WHERE job_post.company_id=company.id");
+$result=mysqli_query($conn,"SELECT * FROM company,job_post WHERE job_post.company_id=company.id");
+//$result2=mysqli_query($conn,"SELECT * FROM company,job_post WHERE job_post.company_id=company.id");
 $result3 = mysqli_query($conn,"SELECT * FROM job_post group by job_catagory order by COUNT(job_catagory) desc");
-
+$result12=mysqli_query($conn,"SELECT * FROM post_reviews");
 
 ?>
+
 
   <?php
 $conn = new mysqli("localhost", "root", "", "the_right_job");
@@ -63,6 +67,7 @@ $rev = $row["No"];
 
 ?>
 
+
               
 
 
@@ -79,6 +84,7 @@ $rev = $row["No"];
 
     <!-- title  -->
     <title>The Right Job</title>
+    <link rel="shortcut icon" href="img/logos/logo.png">
 
  
 
@@ -90,6 +96,43 @@ $rev = $row["No"];
 
     <!-- core style css -->
     <link href="css/styles.css" rel="stylesheet" />
+    <script src="https://kit.fontawesome.com/5bd5cf3f78.js" crossorigin="anonymous"></script>
+     <link href="style.css" rel="stylesheet" />
+
+     <link
+  href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.1/css/all.min.css"
+  rel="stylesheet"
+/>
+<!-- Google Fonts -->
+
+<script>
+"use strict";
+
+!function() {
+  var t = window.driftt = window.drift = window.driftt || [];
+  if (!t.init) {
+    if (t.invoked) return void (window.console && console.error && console.error("Drift snippet included twice."));
+    t.invoked = !0, t.methods = [ "identify", "config", "track", "reset", "debug", "show", "ping", "page", "hide", "off", "on" ], 
+    t.factory = function(e) {
+      return function() {
+        var n = Array.prototype.slice.call(arguments);
+        return n.unshift(e), t.push(n), t;
+      };
+    }, t.methods.forEach(function(e) {
+      t[e] = t.factory(e);
+    }), t.load = function(t) {
+      var e = 3e5, n = Math.ceil(new Date() / e) * e, o = document.createElement("script");
+      o.type = "text/javascript", o.async = !0, o.crossorigin = "anonymous", o.src = "https://js.driftt.com/include/" + n + "/" + t + ".js";
+      var i = document.getElementsByTagName("script")[0];
+      i.parentNode.insertBefore(o, i);
+    };
+  }
+}();
+drift.SNIPPET_VERSION = '0.3.1';
+drift.load('9rf6ri8mzizg');
+</script>
+
+
 
 </head>
 
@@ -105,7 +148,7 @@ $rev = $row["No"];
             <div class="navbar-default">
                
 
-                <div class="container">
+                <div class="container-fluid">
                     <div class="row align-items-center">
                         <div class="col-md-12">
                             <div class="menu_area">
@@ -115,29 +158,48 @@ $rev = $row["No"];
                                         <!-- start logo -->
                                         <a href="home.php" class="navbar-brand width-200px sm-width-180px xs-width-150px"><img id="logo" src="img/logos/logo.png" alt="logo"></a>
                                         <!-- end logo -->
+        
                                     </div>
 
                                    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
     <span class="navbar-toggler-icon"></span>
   </button>
 
+
+
                                     <!-- start menu area -->
                                     <ul class="navbar-nav ml-auto" id="nav" style="display: none;">
                                         <li><a href="home.php">Home</a></li>
-                                        <li><a href="admin.php">Admin</a></li>
-                                     <li><a href="../account/logout.php">Logout</a></li>
+
+                                     
+
                                 
                                         
                                       
-                                        <li><a href="jobs_list.php">jobs list</a></li>
+                                        
                                         <li><a href="post_job.php">Post a Job</a></li>
+                                          <li><a href="profile.php">Jobseeker Dashboard</a></li>
+                                         
+                                        
+                                        <li><a href="company-profile.php">Company dashboard</a></li>
+                                        
+                                       
+                                          <li><a href="../account/logout.php" class="btn btn-warning p-3" >Logout</a></li> 
+                                                                                            
+
+       
+                                        
                                     </ul>
                                     <!-- end menu area -->
 
-                                   
-                                
+   
+    
+    
+               
 
-                                </nav>
+   
+
+
                             </div>
                         </div>
                     </div>
@@ -145,6 +207,19 @@ $rev = $row["No"];
             </div>
         </header>
         <!-- end header section -->
+
+
+               <span>
+            <?php
+ 
+
+
+                  if(isset($_GET['error']))
+                   echo $_GET['error'];
+   
+ 
+                 ?>
+              </span>
 
         <!-- start banner -->
         <section class="bg-img screen-height cover-background line-banner" data-overlay-dark="6" data-background="img/banner/bg2.jpg">
@@ -156,11 +231,37 @@ $rev = $row["No"];
                         <div class="display-table-cell vertical-align-middle text-center">
 
                              <p class="font-size18 xs-font-size16 text-white letter-spacing-1 margin-15px-bottom">logged in as <?php echo $email;?></p>
+                            <?php
 
+                             if ($admin=="jobseeker") {
+   
+    
+
+
+                            
+                           $conn = new mysqli("localhost", "root", "", "the_right_job");
+                            $query = "select id from user_account where email ='".$_SESSION['email']."'";
+                            $result6 = mysqli_query($conn,$query);
+                            while ($row = $result6->fetch_assoc()) {
+                                $id = $row['id']; 
+                                
+                            }
                            
+                         
+                            $query2 = "select picFile from seeker_profile where user_id =$id";
+                            $result7 = mysqli_query($conn,$query2);
+                            while ($row2 = $result7->fetch_assoc()) {
+                                $picFile = $row2['picFile']; 
+                                
+                            
+                        
 
-                            
-                            
+                           echo '<img class="img-responsive img-circle img-thumbnail" src="data:image/png;base64,'.base64_encode($row2['picFile']).'" width="85" height="85"   />';
+
+                       }
+
+                   }
+                           ?>
                                        
                             
                             <h1 class="cd-headline slide">
@@ -192,6 +293,15 @@ $rev = $row["No"];
 
         </section>
         <!-- end banner -->
+
+
+            <div class="container">
+           
+          
+            <br />
+            <div id="result"></div>
+        </div>
+        <div style="clear:both"></div>
 
     <section class="bg-light">
             <div class="container">
@@ -261,8 +371,8 @@ $rev = $row["No"];
                     <div class="col-md-12"> 
                       <?php
                     $i=0;
-                    while($row = mysqli_fetch_array($result) AND $row2 = mysqli_fetch_array($result2)) {
-                         $id = $row['id'];
+                    while($row = mysqli_fetch_array($result)) {
+                         $jpost = $row['id'];
                            $company_id = $row['company_id'];
                            $job_description = $row['job_description'];
                                 $job_type = $row['job_type'];
@@ -271,12 +381,14 @@ $rev = $row["No"];
                                  $vacancy = $row['vacancy'];
                                  $expectation = $row['expectation'];
                                  $job_location = $row['job_location'];
-                                 $company_name = $row2['company_name'];
-                                
+                                 $company_name = $row['company_name'];
+                                  $deadline = $row['deadline'];
 
+                                
+                            echo "<div class='card'>
                                  
 
-                       echo  "<a class='card text-dark border-color-light-black margin-30px-bottom' href='listing-details.html'>
+                       <a class='text-dark border-color-light-black margin-30px-bottom' href='job-details.php?jobid=$jpost&cid=$company_id'>
                            <div class='card-body padding-20px-tb padding-30px-lr'>
                                 <div class='row justify-content-sm-between align-items-sm-center'>
                                     <div class='col-md-6 xs-margin-10px-bottom'>
@@ -288,27 +400,36 @@ $rev = $row["No"];
                                             <div>
 
 
-                                                <span class='text-secondary'>{$position}</span>
-                                            <br> {$company_name}
+                                                <span class='text-secondary'>Position: {$position}</span>
+                                            <br>Company name: {$company_name}
 
-                                               <br> ৳{$salary}
+                                               <br>Salary: ৳{$salary}
+                                             
 
                                             </div>
 
 
                                             
                                         </div>
+                                        
                                     </div>
-                                    <div class='col-md-3 text-secondary xs-margin-10px-bottom'>
-                                        <span class='ti-location-pin margin-10px-right'></span>{$job_location}
-                                        <br> {$job_type}
+
+
+                              <div class=' col-md-3 text-secondary xs-margin-10px-bottom'>
+                                        <span class='ti-location-pin margin-10px-right'></span><i class='fas fa-location-arrow'></i> {$job_location}
+                                        <br><i class='fas fa-clock'></i> {$job_type}
+                                           <br>Deadline: {$deadline}
+                                        
                                     </div>
-                                    <div class='col-md-3 col-xl-2 text-primary text-left text-md-right'>
-                                        Apply now →
+                                    
+                                     <div class='col-md-3 col-xl-2 text-primary text-left text-md-right'>
+                                        Read details →
                                     </div>
+                            
                                 </div>
                             </div>
-                        </a>"
+                        </a>
+                        </div>"
                         ;
                       }
                            
@@ -324,6 +445,7 @@ $rev = $row["No"];
             </div>
         </section>
         <!-- end recent jobs section -->
+
 
      <!-- start counter section -->
         <section class="bg-light2">
@@ -365,11 +487,46 @@ $rev = $row["No"];
                             </div>
                             <h5 class="countup font-size30 no-margin-bottom"><?php echo $com;?></h5>
                             <p class="no-margin-bottom text-extra-dark-gray font-weight-600">Companies</p>
+
+        <div class="demo">
+    <div class="container">
+        <div class="row">
+            <div class="col-md-12">
+                <div id="testimonial-slider" class="owl-carousel">
+
+                                  <?php
+      $i=0;
+      while($row = mysqli_fetch_array($result12)) {
+      ?>
+                    <div class="testimonial">
+                        <div class="testimonial-content">
+                            <div class="testimonial-icon">
+                                <i class="fa fa-quote-left"></i>
+                            </div>
+                            <p class="description">
+                               <?php echo $row["ambience"]; ?>
+                            </p>
+
                         </div>
+                        <h3 class="title"><?php echo $row["company_name"]; ?></h3>
+                    
+                        <span class="post"><i class="fas fa-star"></i><?php echo $row["rating"]; ?></span>
                     </div>
-                </div>
-            </div>
+                       <?php
+                $i++;
+                }
+                ?>
+
+
+ 
+           
         </section>
+
+        </div>
+    </div>
+</div>
+
+
 
 
        
@@ -377,6 +534,8 @@ $rev = $row["No"];
      
 
     </div>
+
+
   
 
     <!-- all js include start -->
@@ -393,5 +552,37 @@ $rev = $row["No"];
     <!-- all js include end -->
 
 </body>
+
+ <script>
+  $(document).ready(function(){
+    load_data();
+    function load_data(query)
+    {
+      $.ajax({
+        url:"fetch.php",
+        method:"post",
+        data:{query:query},
+        success:function(data)
+        {
+          $('#result').html(data);
+        }
+      });
+    }
+
+    $('#search_text').keyup(function(){
+      var search = $(this).val();
+      if(search != '')
+      {
+        load_data(search);
+      }
+      else
+      {
+        load_data();
+      }
+    });
+  });
+  </script>
+
+
 
 </html>

@@ -9,12 +9,15 @@ $email = $_SESSION["email"];
 $admin = $_SESSION["utype"];
 
 
-if ($admin=="admin") {
+if ($admin=="company") {
    
     
 }
 else{
-        header("location: ../account/logout.php");
+         $error = '<div class="alert alert-danger">Log into company profile to post a job</div>';
+    session_destroy();
+   
+    header("location: ../account/company/company_login.php?error=$error");
     }
 
 
@@ -23,10 +26,12 @@ else{
 ?>
  <?php
                            $conn = new mysqli("localhost", "root", "", "the_right_job");
-                            $query = "select id from company where email ='".$_SESSION['email']."'";
+                            $query = "select * from company where email ='".$_SESSION['email']."'";
                             $result6 = mysqli_query($conn,$query);
+
                             while ($row = $result6->fetch_assoc()) {
                                 $id = $row['id']; 
+                                 $company_name = $row['company_name']; 
                                 
                             }
                             ?>
@@ -80,12 +85,11 @@ else{
                                     <!-- start menu area -->
                                     <ul class="navbar-nav ml-auto" id="nav" style="display: none;">
                                         <li><a href="home.php">Home</a></li>
-                                     <li><a href="../account/logout.php">Logout</a></li>
-                                
-                                        
-                                      
-                                        <li><a href="jobs_list.php">jobs list</a></li>
-                                        <li><a href="post_job.php">Post a job</a></li>
+                                     
+                                        <li><a href="company-profile.php">Company dashboard</a></li>
+                                        <li><a href="post_job.php">Post a Job</a></li>
+                                       
+                                        <li><a href="../account/logout.php" class="btn btn-warning p-3" >Logout</a></li>
                                     </ul>
                                     <!-- end menu area -->
 
@@ -120,7 +124,7 @@ else{
 
             <div class="col-xl-6 d-none d-lg-block text-right" >
         
-        <img class="wave3 wow shake" data-wow-duration="1s" data-wow-delay=".2s" src="img/bg.svg">
+        <img class="wave3 wow shake" data-wow-duration="1s" data-wow-delay=".2s" src="img/job.svg">
 
             </div>
 
@@ -133,7 +137,7 @@ else{
          <div class="review_details_area">
         <div class="container">
           <div class="review_form white-bg">
-  <img class="wave" src="img/goals.svg">
+  <img class="wave" src="img/type.svg">
           
                         <h4>Apply for the job</h4>
                         <form method="post" name="regform"  class="register-form" id="register-form"  action="post_job-method.php" >
@@ -146,7 +150,8 @@ else{
                                 <option>HR</option>
                                 <option>Marketing</option>
                                 <option>Finance</option>
-                                <option>Ecommerce</option>
+                                <option>Intern</option>
+                                <option>Sales executive</option>
                                 <option>Engineer</option>
                                 <option>Other</option>
                             </select>
@@ -200,6 +205,12 @@ else{
                                     </div>
 
                                 </div>
+<div class="col-md-6">
+                                 <div class="form-group"> 
+        <label class="control-label" for="date">Date</label>
+        <input class="form-control" id="date" name="deadline" placeholder="MM/DD/YYY" type="text"/>
+      </div>
+  </div>
 
                                  
 
@@ -234,4 +245,20 @@ else{
 
     <!-- custom scripts -->
     <script src="js/main.js"></script>
+
+<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.4.1/js/bootstrap-datepicker.min.js"></script>
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.4.1/css/bootstrap-datepicker3.css"/>
+
+<script>
+    $(document).ready(function(){
+        var date_input=$('input[name="deadline"]'); //our date input has the name "date"
+        var container=$('.bootstrap-iso form').length>0 ? $('.bootstrap-iso form').parent() : "body";
+        date_input.datepicker({
+            format: 'mm/dd/yyyy',
+            container: container,
+            todayHighlight: true,
+            autoclose: true,
+        })
+    })
+</script>
 </html>

@@ -5,8 +5,13 @@ session_start();
 $error = "";
 // store session data
 if (isset($_POST['signin'])) {
+
+    if($_SESSION['captcha']!=$_POST['captcha']){
+      $error = '<div class="alert alert-danger">Captcha error!</div>';
+     header("location: company_login.php?error=$error");
+ }
 	
-    if (empty($_POST['email']) || empty($_POST['password'])) {
+    elseif (empty($_POST['email']) || empty($_POST['password'])) {
         $error = '<div class="alert alert-danger">Email or password is invalid!.</div>';
         header("location: company_login.php?error=$error");
     } else {

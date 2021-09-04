@@ -2,14 +2,40 @@
 session_start();
 
 
-if(isset($_SESSION['email'])) {
+
 $email = $_SESSION["email"];
+
+
+$admin = $_SESSION["utype"];
+
+
+if ($admin=="company") {
+     $error = '<div class="alert alert-danger">Log into jobseeker profile to post a job</div>';
+    session_destroy();
+   
+    header("location: ../account/jobseeker/jobseeker_login.php?error=$error");
+    
+    
 }
 else{
-    header("location: login.php");
-}
+       
+
+
+ }  
 
 ?>
+
+
+<?php
+                           $conn = new mysqli("localhost", "root", "", "the_right_job");
+                            $query = "select id from user_account where email ='".$_SESSION['email']."'";
+                            $result6 = mysqli_query($conn,$query);
+                            while ($row = $result6->fetch_assoc()) {
+                                $id = $row['id']; 
+                                
+                            }
+                            ?>
+
 
 
 <?php
@@ -19,8 +45,8 @@ $conn = new mysqli("localhost", "root", "", "the_right_job");
 
 
 
-$result=mysqli_query($conn,"SELECT * FROM job_post");
-$result2=mysqli_query($conn,"SELECT * FROM company,job_post WHERE job_post.company_id=company.id");
+$result=mysqli_query($conn,"SELECT * FROM job_post_activity where user_id = $id");
+$result2=mysqli_query($conn,"SELECT * FROM job_post_activity,job_post WHERE job_post_activity.job_post_id = job_post.id AND user_id = $id");
 
 
 ?>
@@ -38,7 +64,7 @@ $result2=mysqli_query($conn,"SELECT * FROM company,job_post WHERE job_post.compa
     <meta name="description" content="The Right Job" />
 
     <!-- title  -->
-    <title>All jobs</title>
+    <title>My applications</title>
 
  
 
@@ -50,6 +76,7 @@ $result2=mysqli_query($conn,"SELECT * FROM company,job_post WHERE job_post.compa
 
     <!-- core style css -->
     <link href="css/styles.css" rel="stylesheet" />
+    <script src="https://kit.fontawesome.com/5bd5cf3f78.js" crossorigin="anonymous"></script>
 
 </head>
 
@@ -78,11 +105,12 @@ $result2=mysqli_query($conn,"SELECT * FROM company,job_post WHERE job_post.compa
                                    
                                         <ul class="navbar-nav ml-auto" id="nav" style="display: none;">
                                         <li><a href="home.php">Home</a></li>
-                                     <li><a href="../account/logout.php">Logout</a></li>
-                                
-                                        
-                                      
+                                    
                                         <li><a href="jobs_list.php">jobs list</a></li>
+                                        
+                                        <li><a href="post_review.php">Post a review</a></li>
+                                       
+                                           <li><a href="../account/logout.php" class="btn btn-warning p-3" >Logout</a></li>
                                     </ul>
                                     <!-- end menu area -->
 
@@ -97,20 +125,36 @@ $result2=mysqli_query($conn,"SELECT * FROM company,job_post WHERE job_post.compa
             </div>
         </header>
     
-   
+    <div class="bradcam_area_2 bradcam_bg_2">
+        <div class="container">
+          
+            <div class="row">
+                <div class="col-xl-5">
+                    <div class="bradcam_text">
+                        <h3>My applications</h3>
+                        
+      
+                            
+                            <h3 style="color: #485460" class="wow fadeInLeft" data-wow-duration="1s" data-wow-delay=".2s"> 100+ jobs listed</h3>
+                             
+                    
+                    </div>
+                </div>
 
-  
-       
-            
-           
-                
-                <!-- start page main wrapper -->
-                <div id="main-wrapper">
-                     <!-- start recent jobs section -->
-        <section>
+            <div class="col-xl-6 d-none d-lg-block text-right" >
+        
+        <img class="wave3 wow shake" data-wow-duration="1s" data-wow-delay=".2s" src="img/my-application.svg">
+
+            </div>
+
+            </div>
+        </div>
+          </div> 
+   
+ <section>
             <div class="container">
                 <div class="text-center margin-40px-bottom">
-                    <h3 class="no-margin-bottom">Recent Job</h3>
+                    <h3 class="no-margin-bottom">My applications</h3>
                 </div>
 
                 <div class="row">
@@ -122,34 +166,36 @@ $result2=mysqli_query($conn,"SELECT * FROM company,job_post WHERE job_post.compa
                       <?php
                     $i=0;
                     while($row = mysqli_fetch_array($result) AND $row2 = mysqli_fetch_array($result2)) {
-                         $id = $row['id'];
-                           $company_id = $row['company_id'];
-                           $job_description = $row['job_description'];
-                                $job_type = $row['job_type'];
-                                $salary = $row['salary'];
-                                 $position = $row['position'];
-                                 $vacancy = $row['vacancy'];
-                                 $expectation = $row['expectation'];
-                                 $job_location = $row['job_location'];
-                                 $company_name = $row2['company_name'];
+                         $id = $row2['id'];
+                          $company_id = $row2['company_id'];
+                          $cname = $row2['cname'];
+                          $job_catagory = $row2['job_catagory'];
+                          $job_description = $row2['job_description'];
+                          $job_type = $row2['job_type'];
+                          $salary = $row2['salary'];
+                          $position = $row2['position'];
+                          $vacancy = $row2['vacancy'];
+                          $job_location = $row2['job_location'];
+                          $action_name = $row['action_name'];
+
                                 
 
                                  
 
-                       echo  "<a class='card text-dark border-color-light-black margin-30px-bottom' href='listing-details.html'>
+                       echo  "<a class='card text-dark border-color-light-black margin-30px-bottom' href=#>
                            <div class='card-body padding-20px-tb padding-30px-lr'>
                                 <div class='row justify-content-sm-between align-items-sm-center'>
                                     <div class='col-md-6 xs-margin-10px-bottom'>
                                         <div class='d-block d-sm-flex align-items-center'>
                                             <div class='job-icon bg-light mobile-no-margin-right mobile-margin-20px-bottom margin-30px-right'>
-                                                <img src='img/content/job-1.png' alt='' />
+                                                <img src='https://img.icons8.com/fluency/48/000000/new-job.png'/>
                                             </div>
                                            
                                             <div>
 
 
-                                                <span class='text-secondary'>{$position}</span>
-                                            <br> {$company_name}
+                                                <span class='text-secondary'>Applying for: {$position}</span>
+                                            <br> {$cname}
 
                                                <br> ৳{$salary}
 
@@ -160,11 +206,12 @@ $result2=mysqli_query($conn,"SELECT * FROM company,job_post WHERE job_post.compa
                                         </div>
                                     </div>
                                     <div class='col-md-3 text-secondary xs-margin-10px-bottom'>
-                                        <span class='ti-location-pin margin-10px-right'></span>{$job_location}
-                                        <br> {$job_type}
+                                        <span class='ti-location-pin margin-10px-right'></span><i class='fas fa-location-arrow'></i> {$job_location}
+                                        <br> <i class='fas fa-clock'></i> {$job_type}
                                     </div>
                                     <div class='col-md-3 col-xl-2 text-primary text-left text-md-right'>
-                                        Apply now →
+                                    <i class='fas fa-exclamation-circle'></i>
+                                        {$action_name}
                                     </div>
                                 </div>
                             </div>
@@ -176,27 +223,19 @@ $result2=mysqli_query($conn,"SELECT * FROM company,job_post WHERE job_post.compa
                        
                       
                        
-                                       </div>
+                        
+                </div>
             </div>
         </section>
-        <!-- end recent jobs section -->
-                    <!-- row -->
-                </div>
-                <!-- end page main wrapper -->
-                <div class="page-footer">
-                    <p>Copyright &copy; 2020 Job Board All rights reserved.</p>
-                </div>
-            </div>
-            <!-- end page inner -->
-
-            <!-- start page right sidebar -->
-
+  
+       
+            
+           
+       
+            
            
 
-        </div>
-        <!-- end page content -->
-    </div>
-    <!-- end page container -->
+</body>
 
     <!-- all js include start -->
 
@@ -208,6 +247,5 @@ $result2=mysqli_query($conn,"SELECT * FROM company,job_post WHERE job_post.compa
     <!-- custom scripts -->
     <script src="js/main.js"></script>
 
-</body>
 
 </html>

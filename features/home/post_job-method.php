@@ -6,16 +6,16 @@ $email = $_SESSION["email"];
 
 
      $conn = new mysqli("localhost", "root", "", "the_right_job");
-                            $query = "select id from company where email ='".$_SESSION['email']."'";
+                            $query = "select id,company_name from company where email ='".$_SESSION['email']."'";
                             $result6 = mysqli_query($conn,$query);
                             while ($row = $result6->fetch_assoc()) {
                                 $id = $row['id']; 
-                                
+                                 $company_name = $row['company_name']; 
                             }
                           
 
 
-$statusMsg = "";
+$error = "";
 if (isset($_POST['submit'])) {
 	
 	$conn = new mysqli("localhost", "root", "", "the_right_job");
@@ -29,25 +29,25 @@ if (isset($_POST['submit'])) {
 		$vacancy = $_POST["vacancy"];
 		$expectation = $_POST["expectation"];
 		$job_location = $_POST["job_location"];
-		
+       
+        $date = date('Y-m-d', strtotime($_POST['deadline']));
+       
 
-                    $insert = $conn->query("INSERT into job_post (`company_id`,`job_catagory`, `job_description`, `job_type`, `salary`, `position`,`vacancy`, `expectation`, `job_location`) VALUES ('$id','$job_catagory','$job_description','$job_type','$salary','$position','$vacancy','$expectation','$job_location')");
+                    $insert = $conn->query("INSERT into job_post (`company_id`,`cname`,`job_catagory`, `job_description`, `job_type`, `salary`, `position`,`vacancy`, `expectation`, `job_location`, `deadline`) VALUES ('$id','$company_name','$job_catagory','$job_description','$job_type','$salary','$position','$vacancy','$expectation','$job_location','$date')");
 
                     $conn->close();
                  
-
                     if ($insert) {
-                        $status = 'success';
-                        $statusMsg = "review posted successfully.";
+                        $error = '<div class="alert alert-success">New job posted successfully!</div>';
                     } else {
-                        $statusMsg = "review post failed, please try again.";
+                        $error = '<div class="alert alert-danger">Please try again. </div>';
                     }
                  
             
         // Display status message
-        echo $statusMsg;
+        echo $error;
 }
-header("Location: home.php");
+header("Location: home.php?error=$error");
 
 	
 
