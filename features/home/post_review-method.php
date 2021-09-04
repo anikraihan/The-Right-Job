@@ -35,7 +35,12 @@ if (isset($_POST['submit'])) {
                  
         
 }
+if(isset($_SESSION['utype'])){
 header("Location: home.php?error=$error");
+ }else{
+ 	
+ 	 	header("Location: ../account/home.php?error=$error");
+ }
 
 	
 

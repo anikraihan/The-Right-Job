@@ -9,6 +9,7 @@ if(isset($_POST["query"]))
 	WHERE job_catagory LIKE '%".$search."%'
 	OR job_type LIKE '%".$search."%'
 	OR salary LIKE '%".$search."%'
+	OR cname LIKE '%".$search."%'
 	OR job_location LIKE '%".$search."%'
 	
 	";
@@ -30,25 +31,44 @@ else{
 							<th>Company Name</th>
 							<th>job type</th>
 							<th>Salary</th>
-							<th>Description</th>
+							<th>Job location</th>
 							<th>Category</th>
 							
 						</tr>';
 	while($row = mysqli_fetch_array($result))
 	{
 
+if(isset($_SESSION['utype'])){
+
 		$output .= '
 			<tr>
-				<td>'.$row["job_catagory"].'</td>
-				<td>'.$row["job_description"].'</td>
-				<td>'.$row["salary"].'</td>
+				<td>'.$row["cname"].'</td>
 				<td>'.$row["job_type"].'</td>
+				<td>'.$row["salary"].'</td>
 				<td>'.$row["job_location"].'</td>
-					
+				<td>'.$row["job_catagory"].'</td>
 				
-			<td>	<a href="job-details.php?jobid='.$row["id"].'&cid='.$row["company_id"].'" class="btn btn-success">Apply Now</a></td>
-			</tr>
-		';
+		<td>	<a href="job-details.php?jobid='.$row["id"].'&cid='.$row["company_id"].'" class="btn btn-success">Apply Now</a></td>
+			</tr>';
+		}
+			else{
+$output .= '
+			<tr>
+				<td>'.$row["cname"].'</td>
+				<td>'.$row["job_type"].'</td>
+				<td>'.$row["salary"].'</td>
+				<td>'.$row["job_location"].'</td>
+				<td>'.$row["job_catagory"].'</td>
+				
+		<td>	<a href="../home/job-details.php?jobid='.$row["id"].'&cid='.$row["company_id"].'" class="btn btn-success">Apply Now</a></td>
+			</tr>'
+		;}
+
+
+		;
+
+
+
 	}
 	echo $output;
 }

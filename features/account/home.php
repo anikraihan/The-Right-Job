@@ -215,7 +215,7 @@ drift.load('9rf6ri8mzizg');
                                        
                                       
                                         <div class="col-md-3">
-                                            <button type="submit" class="btn btn-lg btn-warning">Search</button>
+                                            <button type="#" class="btn btn-lg btn-warning">Search</button>
                                         </div>
                                     </div>
                                 </form>
@@ -451,7 +451,7 @@ drift.load('9rf6ri8mzizg');
     function load_data(query)
     {
       $.ajax({
-        url:"fetch.php",
+        url:"../home/fetch.php",
         method:"post",
         data:{query:query},
         success:function(data)

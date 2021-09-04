@@ -47,7 +47,9 @@ if (isset($_POST['submit'])) {
         // Display status message
         echo $error;
 }
+
 header("Location: home.php?error=$error");
+
 
 	
 
