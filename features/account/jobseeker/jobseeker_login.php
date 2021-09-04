@@ -4,11 +4,7 @@ if(!isset($_SESSION))
 { 
     session_start(); 
 } 
-//after successful login will be redirect to following page
-// if (isset($_SESSION['email'])) {
-  
-//   header("location: ../loginsuccess.php");
-// }
+
 
 if (isset($_SESSION['email'])) {
     if($_SESSION['utype']=="admin"){
@@ -18,8 +14,8 @@ if (isset($_SESSION['email'])) {
    header("location: ../loginsuccess.php");
 }
 
-}
 
+}
 
 
 
@@ -89,6 +85,7 @@ if(!isset($_SESSION['access_token']))
 {
 
  $login_button = '<a href="'.$google_client->createAuthUrl().'"><img src="https://img.icons8.com/color/48/000000/google-logo.png"/> </a>';
+
 }
 
 

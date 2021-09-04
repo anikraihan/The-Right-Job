@@ -31,6 +31,43 @@ $result12=mysqli_query($conn,"SELECT * FROM post_reviews");
 ?>
 
 
+  <?php
+$conn = new mysqli("localhost", "root", "", "the_right_job");
+$query = "SELECT COUNT( *) as Number
+   FROM job_post";
+$result16 = mysqli_query($conn,$query);
+while ($row = $result16->fetch_assoc()) {
+$rxx = $row["Number"];
+
+}
+
+$query = "SELECT COUNT( *) as Num
+   FROM seeker_profile";
+$result17 = mysqli_query($conn,$query);
+while ($row = $result17->fetch_assoc()) {
+$seeker = $row["Num"];
+
+}
+
+$query = "SELECT COUNT( *) as Numb
+   FROM company";
+$result18 = mysqli_query($conn,$query);
+while ($row = $result18->fetch_assoc()) {
+$com = $row["Numb"];
+
+}
+
+$query = "SELECT COUNT( *) as No
+   FROM post_reviews";
+$result19 = mysqli_query($conn,$query);
+while ($row = $result19->fetch_assoc()) {
+$rev = $row["No"];
+
+}
+
+?>
+
+
               
 
 
@@ -133,7 +170,9 @@ drift.load('9rf6ri8mzizg');
                                     <!-- start menu area -->
                                     <ul class="navbar-nav ml-auto" id="nav" style="display: none;">
                                         <li><a href="home.php">Home</a></li>
+
                                      
+
                                 
                                         
                                       
@@ -407,6 +446,48 @@ drift.load('9rf6ri8mzizg');
         </section>
         <!-- end recent jobs section -->
 
+
+     <!-- start counter section -->
+        <section class="bg-light2">
+            <div class="container">
+                <div class="row">
+                    <div class="col-md-3 col-6 xs-margin-30px-bottom">
+                        <div class="text-center">
+                            <div class="margin-20px-bottom">
+                                <span class="ti-package font-size24 text-theme-color"></span>
+                            </div>
+
+               
+                            <h5 class="countup font-size30 no-margin-bottom"><?php echo $rxx;?></h5>
+                            <p class="no-margin-bottom text-extra-dark-gray font-weight-600">Live Jobs</p>
+                        </div>
+                    </div>
+                    <div class="col-md-3 col-6 xs-margin-30px-bottom">
+                        <div class="text-center">
+                            <div class="margin-20px-bottom">
+                                <span class="ti-user font-size24 text-theme-color"></span>
+                            </div>
+                            <h5 class="countup font-size30 no-margin-bottom"><?php echo $seeker;?></h5>
+                            <p class="no-margin-bottom text-extra-dark-gray font-weight-600">Candidate</p>
+                        </div>
+                    </div>
+                    <div class="col-md-3 col-6">
+                        <div class="text-center">
+                            <div class="margin-20px-bottom">
+                                <span class="ti-files font-size24 text-theme-color"></span>
+                            </div>
+                            <h5 class="countup font-size30 no-margin-bottom"><?php echo $rev;?></h5>
+                            <p class="no-margin-bottom text-extra-dark-gray font-weight-600">Resume</p>
+                        </div>
+                    </div>
+                    <div class="col-md-3 col-6">
+                        <div class="text-center">
+                            <div class="margin-20px-bottom">
+                                <span class="ti-medall-alt font-size24 text-theme-color"></span>
+                            </div>
+                            <h5 class="countup font-size30 no-margin-bottom"><?php echo $com;?></h5>
+                            <p class="no-margin-bottom text-extra-dark-gray font-weight-600">Companies</p>
+
         <div class="demo">
     <div class="container">
         <div class="row">
@@ -425,6 +506,7 @@ drift.load('9rf6ri8mzizg');
                             <p class="description">
                                <?php echo $row["ambience"]; ?>
                             </p>
+
                         </div>
                         <h3 class="title"><?php echo $row["company_name"]; ?></h3>
                     
@@ -437,11 +519,13 @@ drift.load('9rf6ri8mzizg');
 
 
  
-                 
-            </div>
+           
+        </section>
+
         </div>
     </div>
 </div>
+
 
 
 

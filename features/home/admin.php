@@ -17,7 +17,10 @@ else{
          $error = '<div class="alert alert-danger">Access is only available for admin</div>';
     session_destroy();
    
+
+
     header("location: ../account/jobseeker/jobseeker_login.php?error=$error");
+
     }
 
 
@@ -254,9 +257,10 @@ $result4=mysqli_query($conn,"SELECT id FROM job_post_activity");
 
 
                                                 <span class='text-secondary'>Company id: {$id}</span>
+
                                             <br>Company name: {$cname}
 
-                                               <br>Company description: {$profile_description}
+                                               <br>Company description: {$profile_descript
 
                                             </div>
 
@@ -335,9 +339,11 @@ $result4=mysqli_query($conn,"SELECT id FROM job_post_activity");
 
 
                                                 <span class='text-secondary'>User id: {$user_id}</span>
+
                                             <br>Company name: {$cname}
 
                                                <br>Position: {$position}
+
  
 
                                             </div>
